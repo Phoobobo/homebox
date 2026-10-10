@@ -82,6 +82,13 @@ func (r *EntityTypeRepository) publishMutationEvent(gid uuid.UUID) {
 
 // GetAll returns all entity types for a group.
 func (r *EntityTypeRepository) GetAll(ctx context.Context, gid uuid.UUID) ([]EntityTypeSummary, error) {
+	// Older collections may only have the location type created by their seed
+	// locations. Ensure both categories exist before exposing the create selector.
+	for _, isLocation := range []bool{false, true} {
+		if _, err := r.GetDefault(ctx, gid, isLocation); err != nil {
+			return nil, err
+		}
+	}
 	types, err := r.db.EntityType.Query().
 		Where(entitytype.HasGroupWith(group.ID(gid))).
 		WithDefaultTemplate().

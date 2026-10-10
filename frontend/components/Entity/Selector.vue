@@ -8,7 +8,9 @@
         <div class="flex items-center gap-2">
           <MdiMapMarkerOutline v-if="type.isLocation" class="size-4" />
           <MdiPackageVariantClosed v-else class="size-4" />
-          <span>{{ t(type.name) }}</span>
+          <span>{{
+            type.name === "Item" ? t("global.item") : type.name === "Location" ? t("global.location") : type.name
+          }}</span>
         </div>
       </SelectItem>
     </SelectContent>
