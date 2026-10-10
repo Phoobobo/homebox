@@ -13,7 +13,7 @@
 
   const { t } = useI18n();
 
-  useHead({ title: `HomeBox | ${t("collection.tabs.members")}` });
+  useHead({ title: `在哪儿 | ${t("collection.tabs.members")}` });
 
   const api = useUserApi();
   const auth = useAuthContext();

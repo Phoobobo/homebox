@@ -33,7 +33,7 @@
     middleware: ["auth"],
   });
   useHead({
-    title: "HomeBox | " + t("menu.profile"),
+    title: "在哪儿 | " + t("menu.profile"),
   });
 
   const api = useUserApi();

@@ -5,7 +5,6 @@
   import MdiArrowLeft from "~icons/mdi/arrow-left";
   import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
   import { Button } from "@/components/ui/button";
-  import AppLogo from "~/components/App/Logo.vue";
   import FormPassword from "~/components/Form/Password.vue";
   import PasswordScore from "~/components/global/PasswordScore.vue";
   import { PASSWORD_MIN_LENGTH, PASSWORD_RULES } from "~/lib/passwords";
@@ -13,7 +12,7 @@
   const { t } = useI18n();
 
   useHead({
-    title: "HomeBox | " + t("index.reset_password_title"),
+    title: "在哪儿 | " + t("index.reset_password_title"),
   });
 
   definePageMeta({
@@ -60,11 +59,7 @@
 
 <template>
   <div class="flex min-h-screen flex-col items-center justify-center p-6">
-    <div class="mb-6 flex items-center gap-2 text-3xl font-bold tracking-tight">
-      HomeB
-      <AppLogo class="-mb-2 w-10" />
-      x
-    </div>
+    <div class="mb-6 flex items-center gap-2 text-3xl font-bold tracking-tight">在哪儿</div>
 
     <Card class="md:w-[460px]">
       <CardHeader>

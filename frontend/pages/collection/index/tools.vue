@@ -156,7 +156,7 @@
     middleware: ["auth"],
   });
   useHead({
-    title: "HomeBox | " + t("collection.tabs.tools"),
+    title: "在哪儿 | " + t("collection.tabs.tools"),
   });
 
   const { openDialog } = useDialog();

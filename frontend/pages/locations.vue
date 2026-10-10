@@ -22,7 +22,7 @@
   });
 
   useHead({
-    title: "HomeBox | " + t("menu.locations"),
+    title: "在哪儿 | " + t("menu.locations"),
   });
 
   const api = useUserApi();

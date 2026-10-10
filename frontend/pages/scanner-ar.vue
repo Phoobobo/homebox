@@ -11,6 +11,6 @@
   });
 
   useHead({
-    title: "HomeBox | AR Scanner",
+    title: "在哪儿 | AR Scanner",
   });
 </script>

@@ -19,7 +19,7 @@
 
   const { t } = useI18n();
 
-  useHead({ title: `HomeBox | ${t("menu.collection")}` });
+  useHead({ title: `在哪儿 | ${t("menu.collection")}` });
 
   const route = useRoute();
   const api = useUserApi();

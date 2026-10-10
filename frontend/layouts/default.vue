@@ -218,18 +218,8 @@
 
           <footer v-if="status" class="bottom-0 w-full pb-4 text-center">
             <p class="text-center text-sm">
-              <span
-                v-html="
-                  DOMPurify.sanitize(
-                    $t('global.footer.version_link', {
-                      version: status.build.version.replace(/^v/, ''),
-                      build: status.build.commit,
-                    })
-                  )
-                "
-              />
-              ~
-              <span v-html="DOMPurify.sanitize($t('global.footer.api_link'))" />
+              {{ $t("global.version", { version: status.build.version }) }} ·
+              {{ $t("global.build", { build: status.build.commit.slice(0, 7) }) }}
             </p>
           </footer>
         </div>
@@ -241,7 +231,6 @@
 <script lang="ts" setup>
   import { useI18n } from "vue-i18n";
   import LanguageQuickSwitch from "~/components/App/LanguageQuickSwitch.vue";
-  import DOMPurify from "dompurify";
   import { useTagStore } from "~/stores/tags";
   import { useLocationStore } from "~~/stores/locations";
   import { useEntityTypeStore } from "~~/stores/entityTypes";

@@ -25,7 +25,7 @@
   });
 
   useHead({
-    title: "HomeBox | " + t("global.items"),
+    title: "在哪儿 | " + t("global.items"),
   });
 
   const searchLocked = ref(false);

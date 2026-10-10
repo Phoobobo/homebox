@@ -84,9 +84,9 @@ export default defineNuxtConfig({
       enabled: false,
     },
     manifest: {
-      name: "Homebox",
-      short_name: "Homebox",
-      description: "Home Inventory App",
+      name: "在哪儿",
+      short_name: "在哪儿",
+      description: "家庭物品定位 · House Item Locator",
       theme_color: "#5b7f67",
       start_url: "/home",
       icons: [

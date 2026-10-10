@@ -12,7 +12,7 @@
 
   const { t } = useI18n();
 
-  useHead({ title: `HomeBox | ${t("collection.tabs.settings")}` });
+  useHead({ title: `在哪儿 | ${t("collection.tabs.settings")}` });
 
   const api = useUserApi();
   const { selectedCollection, load: reloadCollections } = useCollections();
