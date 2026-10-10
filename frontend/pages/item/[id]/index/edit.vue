@@ -1,6 +1,7 @@
 <!-- eslint-disable @typescript-eslint/no-explicit-any -->
 <script setup lang="ts">
   import { useI18n } from "vue-i18n";
+  import { householdItemMode } from "~/lib/data/household";
   import { toast } from "@/components/ui/sonner";
   import type { ItemAttachment, EntityFieldData, EntityOut, EntityUpdate } from "~~/lib/api/types/data-contracts";
   import { AttachmentTypes } from "~~/lib/api/types/non-generated";
@@ -322,7 +323,7 @@
       return;
     }
 
-    uploadAttachment([first], null);
+    uploadAttachment([first], householdItemMode ? AttachmentTypes.Photo : null);
   }
 
   const dropPhoto = (files: File[] | null) => uploadAttachment(files, AttachmentTypes.Photo);
@@ -598,7 +599,7 @@
         </DialogHeader>
 
         <FormTextField v-model="editState.title" :label="$t('items.edit.edit_attachment_dialog.attachment_title')" />
-        <div>
+        <div v-if="!householdItemMode">
           <Label for="attachment-type"> {{ $t("items.edit.edit_attachment_dialog.attachment_type") }} </Label>
           <Select id="attachment-type" v-model:model-value="editState.type">
             <SelectTrigger>
@@ -641,7 +642,7 @@
           'top-1': preferences.displayLegacyHeader,
         }"
       >
-        <TooltipProvider :delay-duration="0">
+        <TooltipProvider v-if="!householdItemMode" :delay-duration="0">
           <Tooltip>
             <TooltipTrigger as-child>
               <Label class="flex cursor-pointer items-center gap-2 backdrop-blur-sm">
@@ -664,6 +665,7 @@
           <div class="mb-6 grid gap-4 border-t px-5 pt-2 md:grid-cols-2">
             <LocationSelector v-model="item.parent" @update:model-value="informAboutDesyncingLocationFromParent()" />
             <ItemSelector
+              v-if="!householdItemMode"
               v-model="parent"
               v-model:search="query"
               :items="results"
@@ -675,12 +677,12 @@
               :trigger-search="triggerSearch"
               @update:model-value="maybeSyncWithParentLocation()"
             />
-            <div class="flex flex-col gap-2">
+            <div v-if="!householdItemMode" class="flex flex-col gap-2">
               <Label class="px-1">{{ $t("items.sync_child_locations") }}</Label>
               <Switch v-model="item.syncChildEntityLocations" @update:model-value="syncChildEntityLocations()" />
             </div>
             <TagSelector v-model="item.tagIds" :tags="tags" />
-            <div class="flex flex-col gap-1">
+            <div v-if="!householdItemMode" class="flex flex-col gap-1">
               <Label class="px-1">{{ $t("global.entity_type") }}</Label>
               <EntitySelector
                 :entity-types="entityTypeStore.allTypes"
@@ -691,7 +693,11 @@
           </div>
 
           <div class="border-t sm:p-0">
-            <div v-for="field in mainFields" :key="field.ref" class="grid grid-cols-1 sm:divide-y">
+            <div
+              v-for="field in mainFields.filter(f => !householdItemMode || ['name', 'description'].includes(f.ref))"
+              :key="field.ref"
+              class="grid grid-cols-1 sm:divide-y"
+            >
               <div class="border-b px-4 pb-4 pt-2 sm:px-6">
                 <FormTextArea
                   v-if="field.type === 'textarea'"
@@ -743,7 +749,7 @@
           </div>
         </BaseCard>
 
-        <BaseCard v-if="preferences.editorAdvancedView">
+        <BaseCard v-if="!householdItemMode && preferences.editorAdvancedView">
           <template #title> {{ $t("items.custom_fields") }} </template>
           <div class="space-y-4 divide-y border-t px-5">
             <div
@@ -778,24 +784,40 @@
           @drop.prevent="handleAttachmentCardDrop"
         >
           <div class="px-4 py-5 sm:px-6">
-            <h3 class="text-lg font-medium leading-6">{{ $t("items.attachments") }}</h3>
+            <h3 class="text-lg font-medium leading-6">
+              {{ $t(householdItemMode ? "items.photos" : "items.attachments") }}
+            </h3>
             <p class="text-xs">{{ $t("items.changes_persisted_immediately") }}</p>
           </div>
           <div class="border-t p-4">
             <div v-if="attDropZoneActive" class="grid grid-cols-4 gap-4">
               <DropZone data-link-type="photo" @drop="dropPhoto"> {{ $t("items.photos") }} </DropZone>
-              <DropZone data-link-type="warranty" @drop="dropWarranty"> {{ $t("items.warranty") }} </DropZone>
-              <DropZone data-link-type="manual" @drop="dropManual"> {{ $t("items.manuals") }} </DropZone>
-              <DropZone data-link-type="attachment" @drop="dropAttachment"> {{ $t("items.attachments") }} </DropZone>
-              <DropZone data-link-type="receipt" @drop="dropReceipt"> {{ $t("items.receipts") }} </DropZone>
+              <DropZone v-if="!householdItemMode" data-link-type="warranty" @drop="dropWarranty">
+                {{ $t("items.warranty") }}
+              </DropZone>
+              <DropZone v-if="!householdItemMode" data-link-type="manual" @drop="dropManual">
+                {{ $t("items.manuals") }}
+              </DropZone>
+              <DropZone v-if="!householdItemMode" data-link-type="attachment" @drop="dropAttachment">
+                {{ $t("items.attachments") }}
+              </DropZone>
+              <DropZone v-if="!householdItemMode" data-link-type="receipt" @drop="dropReceipt">
+                {{ $t("items.receipts") }}
+              </DropZone>
             </div>
             <button
               v-else
-              data-link-type="attachment"
+              :data-link-type="householdItemMode ? 'photo' : 'attachment'"
               class="grid h-24 w-full place-content-center border-2 border-dashed border-primary"
               @click="clickUpload"
             >
-              <input ref="refAttachmentInput" hidden type="file" @change="uploadImage" />
+              <input
+                ref="refAttachmentInput"
+                hidden
+                type="file"
+                :accept="householdItemMode ? 'image/*' : undefined"
+                @change="uploadImage"
+              />
               <p>{{ $t("items.drag_and_drop") }}</p>
             </button>
           </div>
@@ -803,7 +825,7 @@
           <div class="border-t p-4">
             <ul role="list" class="divide-y rounded-md border">
               <li
-                v-for="attachment in item.attachments"
+                v-for="attachment in item.attachments.filter(a => !householdItemMode || a.type === 'photo')"
                 :key="attachment.id"
                 class="grid grid-cols-6 justify-between py-3 pl-3 pr-4 text-sm"
               >
@@ -881,7 +903,7 @@
           </div>
         </Card>
 
-        <Card v-if="preferences.editorAdvancedView" class="overflow-visible shadow-xl">
+        <Card v-if="!householdItemMode && preferences.editorAdvancedView" class="overflow-visible shadow-xl">
           <div class="px-4 py-5 sm:px-6">
             <h3 class="text-lg font-medium leading-6">{{ $t("items.purchase_details") }}</h3>
           </div>
@@ -930,7 +952,7 @@
           </div>
         </Card>
 
-        <Card v-if="preferences.editorAdvancedView" class="overflow-visible shadow-xl">
+        <Card v-if="!householdItemMode && preferences.editorAdvancedView" class="overflow-visible shadow-xl">
           <div class="px-4 py-5 sm:px-6">
             <h3 class="text-lg font-medium leading-6">{{ $t("items.warranty_details") }}</h3>
           </div>
@@ -979,7 +1001,7 @@
           </div>
         </Card>
 
-        <Card v-if="preferences.editorAdvancedView" class="overflow-visible shadow-xl">
+        <Card v-if="!householdItemMode && preferences.editorAdvancedView" class="overflow-visible shadow-xl">
           <div class="px-4 py-5 sm:px-6">
             <h3 class="text-lg font-medium leading-6">{{ $t("items.sold_details") }}</h3>
           </div>

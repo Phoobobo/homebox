@@ -1,5 +1,6 @@
 <script setup lang="ts">
   import { useI18n } from "vue-i18n";
+  import { householdItemMode } from "~/lib/data/household";
   import { toast } from "@/components/ui/sonner";
   import type { AnyDetail, Detail, Details } from "~~/components/global/DetailsSection/types";
   import { filterZeroValues } from "~~/components/global/DetailsSection/types";
@@ -701,12 +702,17 @@
             </div>
             <div class="ml-auto mt-2 flex flex-wrap items-center justify-between gap-2">
               <LabelMaker
-                v-if="typeof item.assetId === 'string' && item.assetId != ''"
+                v-if="!householdItemMode && typeof item.assetId === 'string' && item.assetId != ''"
                 :id="item.assetId"
                 type="asset"
               />
-              <LabelMaker v-else :id="item.id" type="item" />
-              <Button class="w-9 md:w-auto" :aria-label="$t('global.create_subitem')" @click="createSubitem">
+              <LabelMaker v-else-if="!householdItemMode" :id="item.id" type="item" />
+              <Button
+                v-if="!householdItemMode"
+                class="w-9 md:w-auto"
+                :aria-label="$t('global.create_subitem')"
+                @click="createSubitem"
+              >
                 <MdiPlus />
                 <span class="hidden md:inline">{{ $t("global.create_subitem") }}</span>
               </Button>
@@ -723,7 +729,7 @@
                     <MdiPlusBoxMultipleOutline class="mr-2 size-4" />
                     {{ $t("global.duplicate") }}
                   </DropdownMenuItem>
-                  <DropdownMenuItem @click="saveAsTemplate">
+                  <DropdownMenuItem v-if="!householdItemMode" @click="saveAsTemplate">
                     <MdiContentSaveEdit class="mr-2 size-4" />
                     {{ $t("components.template.save_as_template") }}
                   </DropdownMenuItem>
@@ -746,7 +752,7 @@
       <div class="mb-6 mt-3 flex flex-wrap items-center justify-between">
         <ButtonGroup>
           <Button
-            v-for="tab in tabs"
+            v-for="tab in tabs.filter(tab => !householdItemMode || tab.id !== 'log')"
             :key="tab.id"
             as-child
             :variant="tab.to === currentPath ? 'default' : 'outline'"
@@ -766,7 +772,7 @@
         <NuxtPage :item="item" :page-key="itemId" />
 
         <!-- anything in this is not rendered if on another page -->
-        <BaseCard v-if="!hasNested" collapsable>
+        <BaseCard v-if="!householdItemMode && !hasNested" collapsable>
           <template #title> {{ $t("items.details") }} </template>
           <template #title-actions>
             <div class="mt-2 flex flex-wrap items-center justify-between gap-4">
@@ -812,7 +818,7 @@
             </div>
           </BaseCard>
 
-          <BaseCard v-if="showAttachments" collapsable>
+          <BaseCard v-if="!householdItemMode && showAttachments" collapsable>
             <template #title> {{ $t("items.attachments") }} </template>
             <DetailsSection v-if="attachmentDetails.length > 0" :details="attachmentDetails">
               <template #manuals>
@@ -849,17 +855,17 @@
             </div>
           </BaseCard>
 
-          <BaseCard v-if="showPurchase" collapsable>
+          <BaseCard v-if="!householdItemMode && showPurchase" collapsable>
             <template #title> {{ $t("items.purchase_details") }} </template>
             <DetailsSection :details="purchaseDetails" />
           </BaseCard>
 
-          <BaseCard v-if="showWarranty" collapsable>
+          <BaseCard v-if="!householdItemMode && showWarranty" collapsable>
             <template #title> {{ $t("items.warranty_details") }} </template>
             <DetailsSection :details="warrantyDetails" />
           </BaseCard>
 
-          <BaseCard v-if="showSold" collapsable>
+          <BaseCard v-if="!householdItemMode && showSold" collapsable>
             <template #title> {{ $t("items.sold_details") }} </template>
             <DetailsSection :details="soldDetails" />
           </BaseCard>

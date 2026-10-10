@@ -12,7 +12,7 @@
       </div>
     </template>
     <template #header-actions>
-      <div class="flex gap-2">
+      <div v-if="!householdItemMode" class="flex gap-2">
         <TooltipProvider :delay-duration="0">
           <!-- Template selector button -->
           <Tooltip v-if="!selectedEntityType?.isLocation">
@@ -163,7 +163,7 @@
         :min-length="1"
       />
       <FormTextField
-        v-if="!selectedEntityType?.isLocation"
+        v-if="!householdItemMode && !selectedEntityType?.isLocation"
         v-model.number="form.quantity"
         :label="
           $t('components.entity.create_modal.entity_quantity', {
@@ -224,6 +224,7 @@
 
 <script setup lang="ts">
   import { useI18n } from "vue-i18n";
+  import { householdItemMode } from "~/lib/data/household";
   import { DialogID } from "@/components/ui/dialog-provider/utils";
   import { toast } from "@/components/ui/sonner";
   import { Button, ButtonGroup } from "~/components/ui/button";
