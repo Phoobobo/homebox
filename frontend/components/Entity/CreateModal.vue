@@ -156,7 +156,7 @@
         :autofocus="true"
         :label="
           $t('components.entity.create_modal.entity_name', {
-            type: selectedEntityType ? t(selectedEntityType.name) : '',
+            type: selectedEntityType ? entityTypeLabel(selectedEntityType.name) : '',
           })
         "
         :max-length="255"
@@ -167,7 +167,7 @@
         v-model.number="form.quantity"
         :label="
           $t('components.entity.create_modal.entity_quantity', {
-            type: t(selectedEntityType ? selectedEntityType.name : 'global.entity'),
+            type: entityTypeLabel(selectedEntityType?.name),
           })
         "
         type="number"
@@ -177,7 +177,7 @@
         v-model="form.description"
         :label="
           $t('components.entity.create_modal.entity_description', {
-            type: t(selectedEntityType ? selectedEntityType.name : 'global.entity'),
+            type: entityTypeLabel(selectedEntityType?.name),
           })
         "
         :max-length="1000"
@@ -186,7 +186,7 @@
       <PhotoUploader
         :label="
           $t('components.entity.create_modal.entity_photo', {
-            type: t(selectedEntityType ? selectedEntityType.name : 'global.entity'),
+            type: entityTypeLabel(selectedEntityType?.name),
           })
         "
         :button-label="$t('components.entity.create_modal.upload_photos')"
@@ -266,6 +266,13 @@
   import EntitySelector from "~/components/Entity/Selector.vue";
 
   const { t } = useI18n();
+
+  function entityTypeLabel(name?: string) {
+    if (!name) return t("global.entity");
+    if (name === "Item") return t("global.item");
+    if (name === "Location") return t("global.location");
+    return name;
+  }
   const { openDialog, closeDialog, registerOpenDialogCallback } = useDialog();
 
   useDialogHotkey(DialogID.CreateEntity, { code: "Digit1", shift: true }, () => ({
@@ -595,7 +602,7 @@
     if (loading.value) {
       toast.error(
         t("components.entity.create_modal.toast.already_creating", {
-          type: t(selectedEntityType.value ? selectedEntityType.value.name : "global.entity"),
+          type: entityTypeLabel(selectedEntityType.value?.name),
         })
       );
       return;
@@ -653,7 +660,7 @@
       loading.value = false;
       toast.error(
         t("components.entity.create_modal.toast.create_failed", {
-          type: t(selectedEntityType.value ? selectedEntityType.value.name : "global.entity"),
+          type: entityTypeLabel(selectedEntityType.value?.name),
         })
       );
       return;
@@ -661,7 +668,7 @@
 
     toast.success(
       t("components.entity.create_modal.toast.create_success", {
-        type: t(selectedEntityType.value ? selectedEntityType.value.name : "global.entity"),
+        type: entityTypeLabel(selectedEntityType.value?.name),
       })
     );
 
