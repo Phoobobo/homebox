@@ -255,10 +255,8 @@
   import MdiQrcodeScan from "~icons/mdi/qrcode-scan";
   import MdiAccount from "~icons/mdi/account";
   import MdiCog from "~icons/mdi/cog";
-  import MdiWrench from "~icons/mdi/wrench";
   import MdiPlus from "~icons/mdi/plus";
   import MdiLogout from "~icons/mdi/logout";
-  import MdiFileDocumentMultiple from "~icons/mdi/file-document-multiple";
   import MdiChevronRight from "~icons/mdi/chevron-right";
 
   import {
@@ -432,20 +430,6 @@
       active: computed(() => route.path === "/items"),
       name: computed(() => t("menu.search")),
       to: "/items",
-    },
-    {
-      icon: MdiFileDocumentMultiple,
-      id: 4,
-      active: computed(() => route.path === "/templates"),
-      name: computed(() => t("menu.templates")),
-      to: "/templates",
-    },
-    {
-      icon: MdiWrench,
-      id: 5,
-      active: computed(() => route.path === "/maintenance"),
-      name: computed(() => t("menu.maintenance")),
-      to: "/maintenance",
     },
     {
       icon: MdiAccount,
