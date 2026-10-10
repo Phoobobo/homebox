@@ -1,5 +1,5 @@
 {
-    "app": { "name": "zainaer" },
+    "app": { "name": "Zainaer" },
     "collection": {
         "copy_invite": "Copy Invite Link",
         "create_invite": "Create Invite",
@@ -529,7 +529,7 @@
         "set_email": "What's your email?",
         "set_name": "What's your name?",
         "set_password": "Set your password",
-        "tagline": "Don’t ask me where it is. Ask Whereabouts.",
+        "tagline": "Don’t ask me where it is. Ask Zainaer.",
         "title": "Organize and Tag Your Stuff",
         "toast": {
             "invalid_email": "Invalid email address",
@@ -866,8 +866,8 @@
             "bordered_labels": "Bordered Labels",
             "generate_page": "Generate Page",
             "input_placeholder": "Type here",
-            "instruction_1": "The zainaer Label Generator is a tool to help you print labels for your zainaer inventory. These are intended to\n be print-ahead labels so you can print many labels and have them ready to apply",
-            "instruction_2": "As such, these labels work by printing a URL QR Code and AssetID information on a label. If you've disabled\n AssetID's in your zainaer settings, you can still use this tool, but the AssetID's won't reference any item",
+            "instruction_1": "The Zainaer Label Generator is a tool to help you print labels for your Zainaer inventory. These are intended to\n be print-ahead labels so you can print many labels and have them ready to apply",
+            "instruction_2": "As such, these labels work by printing a URL QR Code and AssetID information on a label. If you've disabled\n AssetID's in your Zainaer settings, you can still use this tool, but the AssetID's won't reference any item",
             "instruction_3": "This feature is in early development stages and may change in future releases, if you have feedback please\n provide it in the '<a href=\"https://github.com/sysadminsmedia/homebox/discussions/53\">'GitHub Discussion'</a>'",
             "label_height": "Label Height",
             "label_width": "Label Width",
@@ -880,12 +880,12 @@
             "page_width": "Page Width",
             "print_location_row": "Print Location Row",
             "qr_code_example": "QR Code Example",
-            "replace_homebox_behavior": "Replace \"zainaer\" text behavior",
-            "replace_homebox_behavior_always_replace": "Always Replace \"zainaer\"",
-            "replace_homebox_behavior_item_no_location": "Replace \"zainaer\" when item has no location",
-            "replace_homebox_behavior_item_no_name": "Replace \"zainaer\" when item has no name",
-            "replace_homebox_behavior_item_no_name_no_location": "Replace \"zainaer\" when item has no name and no location",
-            "replace_homebox_behavior_show_homebox": "Show \"zainaer\"",
+            "replace_homebox_behavior": "Replace \"Zainaer\" text behavior",
+            "replace_homebox_behavior_always_replace": "Always Replace \"Zainaer\"",
+            "replace_homebox_behavior_item_no_location": "Replace \"Zainaer\" when item has no location",
+            "replace_homebox_behavior_item_no_name": "Replace \"Zainaer\" when item has no name",
+            "replace_homebox_behavior_item_no_name_no_location": "Replace \"Zainaer\" when item has no name and no location",
+            "replace_homebox_behavior_show_homebox": "Show \"Zainaer\"",
             "replace_homebox_text": "Replacement text",
             "skip_first_labels": "Skip First Labels",
             "tip_1": "The defaults here are setup for the\n '<a href=\"https://www.avery.com/templates/5260\">'Avery 5260 label sheets'</a>'. If you're using a different sheet,\n you'll need to adjust the settings to match your sheet.",
@@ -990,19 +990,19 @@
         },
         "backups_sub": "Export your entire collection — entities, tags, attachments, and metadata — to a portable zip archive. Restore an archive into a freshly registered, empty collection on this or another server.",
         "demo_mode_error": {
-            "wipe_inventory": "Inventory, tags, locations and maintenance records cannot be wiped whilst zainaer is in demo mode. Please ensure that you are not in demo mode and try again."
+            "wipe_inventory": "Inventory, tags, locations and maintenance records cannot be wiped whilst Zainaer is in demo mode. Please ensure that you are not in demo mode and try again."
         },
         "import_export": "Import/Export",
         "import_export_set": {
             "export": "Export Inventory",
             "export_button": "Export Inventory",
-            "export_sub": "Exports the standard CSV format for zainaer. This will export all items in your inventory.",
+            "export_sub": "Exports the standard CSV format for Zainaer. This will export all items in your inventory.",
             "import": "Import Inventory",
             "import_button": "Import Inventory",
             "import_ref_confirm": "Are you sure you want to ensure all assets have an import_ref? This can take a while and cannot be undone.",
-            "import_sub": "Imports the standard CSV format for zainaer. Without an '<code>'HB.import_ref'</code>' column, this will '<b>'not'</b>' overwrite any existing items in your inventory, only add new items. Rows with an '<code>'HB.import_ref'</code>' column are merged into existing items with the same import_ref, if one exists."
+            "import_sub": "Imports the standard CSV format for Zainaer. Without an '<code>'HB.import_ref'</code>' column, this will '<b>'not'</b>' overwrite any existing items in your inventory, only add new items. Rows with an '<code>'HB.import_ref'</code>' column are merged into existing items with the same import_ref, if one exists."
         },
-        "import_export_sub": "Import and export your inventory to and from a CSV file. This is useful for migrating your inventory to a new instance of zainaer.",
+        "import_export_sub": "Import and export your inventory to and from a CSV file. This is useful for migrating your inventory to a new instance of Zainaer.",
         "reports": "Reports",
         "reports_set": {
             "asset_labels": "Asset ID Labels",
