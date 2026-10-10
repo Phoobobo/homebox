@@ -1069,5 +1069,10 @@
             "restore_started": "恢复开始，请稍后刷新以查看导入的项目。",
             "wipe_inventory_success": "已成功清空库存。{ results }个物品已被删除。"
         }
+    },
+    "household": {
+        "no_tags": "尚未添加标签",
+        "no_photos": "尚未添加照片",
+        "no_description": "尚未填写描述"
     }
 }

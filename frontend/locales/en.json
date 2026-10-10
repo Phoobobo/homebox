@@ -411,11 +411,11 @@
                 "default_template": "Default template: {name}",
                 "badge_container": "Container",
                 "tooltip": {
-                "edit": "Edit",
-                "delete": "Delete"
+                    "edit": "Edit",
+                    "delete": "Delete"
                 },
                 "actions": {
-                "delete": "Delete"
+                    "delete": "Delete"
                 }
             },
             "toasts": {
@@ -1028,5 +1028,10 @@
             "restore_started": "Restore started — refresh shortly to see imported items.",
             "wipe_inventory_success": "Successfully wiped inventory. { results } items deleted."
         }
+    },
+    "household": {
+        "no_tags": "No tags yet",
+        "no_photos": "No photos yet",
+        "no_description": "No description yet"
     }
 }

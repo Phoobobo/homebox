@@ -743,8 +743,8 @@
             </div>
           </div>
         </header>
-        <Separator v-if="item.description" />
-        <div v-if="item.description" class="prose max-w-full p-1">
+        <Separator v-if="!householdItemMode && item.description" />
+        <div v-if="!householdItemMode && item.description" class="prose max-w-full p-1">
           <Markdown class="text-base" :source="item.description" />
         </div>
       </Card>
@@ -770,6 +770,44 @@
       <div class="space-y-6">
         <!-- this renders the other pages content -->
         <NuxtPage :item="item" :page-key="itemId" />
+
+        <BaseCard v-if="householdItemMode && !hasNested">
+          <template #title>{{ $t("items.details") }}</template>
+          <dl class="space-y-5 p-5">
+            <div>
+              <dt class="mb-2 font-medium">{{ $t("items.name") }}</dt>
+              <dd>{{ item.name }}</dd>
+            </div>
+            <div>
+              <dt class="mb-2 font-medium">{{ $t("global.tags") }}</dt>
+              <dd class="flex flex-wrap gap-2">
+                <TagChip v-for="tag in itemTags" :key="tag.id" :tag="tag" size="sm" :ancestors="tag.ancestors" />
+                <span v-if="!itemTags.length" class="text-foreground/60">{{ $t("household.no_tags") }}</span>
+              </dd>
+            </div>
+            <div>
+              <dt class="mb-2 font-medium">{{ $t("items.photos") }}</dt>
+              <dd class="flex flex-wrap gap-3">
+                <button
+                  v-for="(img, i) in photos"
+                  :key="i"
+                  :aria-label="$t('items.photos')"
+                  @click="openImageDialog(img, item.id)"
+                >
+                  <img class="max-h-[240px] rounded" :src="img.thumbnailSrc" :alt="item.name" />
+                </button>
+                <span v-if="!photos?.length" class="text-foreground/60">{{ $t("household.no_photos") }}</span>
+              </dd>
+            </div>
+            <div>
+              <dt class="mb-2 font-medium">{{ $t("items.description") }}</dt>
+              <dd>
+                <Markdown v-if="item.description" class="prose max-w-full" :source="item.description" />
+                <span v-else class="text-foreground/60">{{ $t("household.no_description") }}</span>
+              </dd>
+            </div>
+          </dl>
+        </BaseCard>
 
         <!-- anything in this is not rendered if on another page -->
         <BaseCard v-if="!householdItemMode && !hasNested" collapsable>
@@ -806,7 +844,7 @@
 
         <!-- anything in this is not rendered if on another page -->
         <template v-if="!hasNested">
-          <BaseCard v-if="photos && photos.length > 0">
+          <BaseCard v-if="!householdItemMode && photos && photos.length > 0">
             <template #title> {{ $t("items.photos") }} </template>
             <div class="scroll-bg container mx-auto flex max-h-[500px] flex-wrap gap-2 overflow-y-scroll border-t p-4">
               <button v-for="(img, i) in photos" :key="i" @click="openImageDialog(img, item.id)">
