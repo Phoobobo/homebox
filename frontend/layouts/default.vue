@@ -8,9 +8,7 @@
     <ModalConfirm />
     <OutdatedModal v-if="status" :status="status" />
     <EntityCreateModal />
-    <WipeInventoryDialog />
     <TagCreateModal />
-    <ItemBarcodeModal />
     <AppQuickMenuModal :actions="quickMenuActions" />
     <AppScannerModal />
     <CollectionCreateModal />
@@ -293,9 +291,7 @@
   import ModalConfirm from "~/components/ModalConfirm.vue";
   import OutdatedModal from "~/components/App/OutdatedModal.vue";
   import EntityCreateModal from "~/components/Entity/CreateModal.vue";
-  import WipeInventoryDialog from "~/components/WipeInventoryDialog.vue";
   import TagCreateModal from "~/components/Tag/CreateModal.vue";
-  import ItemBarcodeModal from "~/components/Item/BarcodeModal.vue";
   import AppQuickMenuModal from "~/components/App/QuickMenuModal.vue";
   import AppScannerModal from "~/components/App/ScannerModal.vue";
   import AppLogo from "~/components/App/Logo.vue";
@@ -458,22 +454,10 @@
           to: "/collection/invites",
         },
         {
-          id: 63,
-          active: computed(() => route.path === "/collection/notifiers"),
-          name: computed(() => t("collection.tabs.notifiers")),
-          to: "/collection/notifiers",
-        },
-        {
           id: 64,
           active: computed(() => route.path === "/collection/settings"),
           name: computed(() => t("collection.tabs.settings")),
           to: "/collection/settings",
-        },
-        {
-          id: 65,
-          active: computed(() => route.path === "/collection/entity-types"),
-          name: computed(() => t("collection.tabs.entity_types")),
-          to: "/collection/entity-types",
         },
         {
           id: 66,

@@ -36,37 +36,6 @@
       <div class="col-span-4 flex grow flex-col gap-y-1 p-4 pt-2">
         <h2 class="line-clamp-2 text-ellipsis text-wrap text-lg font-bold">{{ item.name }}</h2>
         <Separator class="mb-1" />
-        <TooltipProvider :delay-duration="0">
-          <div class="flex items-center gap-2">
-            <Tooltip v-if="item.insured">
-              <TooltipTrigger>
-                <MdiShieldCheck class="size-5 text-primary" />
-              </TooltipTrigger>
-              <TooltipContent>
-                {{ $t("global.insured") }}
-              </TooltipContent>
-            </Tooltip>
-            <Tooltip v-if="item.archived">
-              <TooltipTrigger>
-                <MdiArchive class="size-5 text-destructive" />
-              </TooltipTrigger>
-              <TooltipContent>
-                {{ $t("global.archived") }}
-              </TooltipContent>
-            </Tooltip>
-            <div class="grow" />
-            <Tooltip>
-              <TooltipTrigger>
-                <Badge>
-                  {{ item.quantity }}
-                </Badge>
-              </TooltipTrigger>
-              <TooltipContent>
-                {{ $t("global.quantity") }}
-              </TooltipContent>
-            </Tooltip>
-          </div>
-        </TooltipProvider>
         <Markdown class="mb-2 line-clamp-3 text-ellipsis" :source="item.description" />
         <div class="-mr-1 mt-auto flex flex-wrap justify-end gap-2">
           <TagChip v-for="tag in itemTags" :key="tag.id" :tag="tag" size="sm" :ancestors="tag.ancestors" />
@@ -78,11 +47,8 @@
 
 <script setup lang="ts">
   import type { EntityOut, EntitySummary } from "~~/lib/api/types/data-contracts";
-  import MdiShieldCheck from "~icons/mdi/shield-check";
-  import MdiArchive from "~icons/mdi/archive";
   import { Badge } from "@/components/ui/badge";
   import { Card } from "@/components/ui/card";
-  import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
   import { Separator } from "@/components/ui/separator";
   import Markdown from "@/components/global/Markdown.vue";
   import TagChip from "@/components/Tag/Chip.vue";

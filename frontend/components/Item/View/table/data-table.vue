@@ -43,13 +43,15 @@
   const preferences = useViewPreferences();
   const defaultPageSize = preferences.value.itemsPerTablePage;
   const tableHeadersData = preferences.value.tableHeaders;
-  const defaultVisible = props.disableControls
-    ? ["name", "quantity", "location"]
-    : ["name", "quantity", "insured", "purchasePrice"];
+  const defaultVisible = ["name", "location"];
 
   const tableHeaders = computed(
     () =>
-      (props.disableControls ? undefined : tableHeadersData) ??
+      (props.disableControls
+        ? undefined
+        : tableHeadersData
+            ?.filter(h => props.columns.some(c => c.id === h.value))
+            .map(h => ({ ...h, enabled: h.value === "location" || h.enabled }))) ??
       props.columns
         .filter(c => c.enableHiding !== false)
         .map(c => ({

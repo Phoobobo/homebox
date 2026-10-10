@@ -766,7 +766,7 @@
     },
     "menu": {
         "collection": "Collection",
-        "create_item": "Item / Asset",
+        "create_item": "Item",
         "create_location": "Location",
         "create_tag": "Tag",
         "home": "Home",

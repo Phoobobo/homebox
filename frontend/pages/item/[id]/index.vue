@@ -62,9 +62,9 @@
   const preferences = useViewPreferences();
 
   const temporaryDuplicateSettings = ref<DuplicateSettings>({
-    copyMaintenance: preferences.value.duplicateSettings.copyMaintenance,
+    copyMaintenance: false,
     copyAttachments: preferences.value.duplicateSettings.copyAttachments,
-    copyCustomFields: preferences.value.duplicateSettings.copyCustomFields,
+    copyCustomFields: false,
     copyPrefixOverride: preferences.value.duplicateSettings.copyPrefixOverride,
   });
 
@@ -523,15 +523,15 @@
 
     const duplicateSettings = settings
       ? {
-          copyMaintenance: settings.copyMaintenance,
+          copyMaintenance: false,
           copyAttachments: settings.copyAttachments,
-          copyCustomFields: settings.copyCustomFields,
+          copyCustomFields: false,
           copyPrefix: settings.copyPrefixOverride ?? t("items.duplicate.prefix"),
         }
       : {
-          copyMaintenance: preferences.value.duplicateSettings.copyMaintenance,
+          copyMaintenance: false,
           copyAttachments: preferences.value.duplicateSettings.copyAttachments,
-          copyCustomFields: preferences.value.duplicateSettings.copyCustomFields,
+          copyCustomFields: false,
           copyPrefix: preferences.value.duplicateSettings.copyPrefixOverride ?? t("items.duplicate.prefix"),
         };
 

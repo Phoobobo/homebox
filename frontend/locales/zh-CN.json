@@ -807,7 +807,7 @@
     },
     "menu": {
         "collection": "集合",
-        "create_item": "物品/资产",
+        "create_item": "物品",
         "create_location": "位置",
         "create_tag": "标签",
         "home": "主页",

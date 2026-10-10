@@ -5,30 +5,6 @@
       <BaseCard>
         <template #title>
           <BaseSectionHeader>
-            <MdiFileChart class="mr-2" />
-            <span> {{ $t("tools.reports") }} </span>
-            <template #description> {{ $t("tools.reports_sub") }} </template>
-          </BaseSectionHeader>
-        </template>
-        <div class="divide-y border-t p-4">
-          <DetailAction to="/reports/label-generator">
-            <template #title>{{ $t("tools.reports_set.asset_labels") }}</template>
-            {{ $t("tools.reports_set.asset_labels_sub") }}
-            <template #button>
-              {{ $t("tools.reports_set.asset_labels_button") }}
-              <MdiArrowRight class="ml-2" />
-            </template>
-          </DetailAction>
-          <DetailAction @action="getBillOfMaterials()">
-            <template #title>{{ $t("tools.reports_set.bill_of_materials") }}</template>
-            {{ $t("tools.reports_set.bill_of_materials_sub") }}
-            <template #button> {{ $t("tools.reports_set.bill_of_materials_button") }} </template>
-          </DetailAction>
-        </div>
-      </BaseCard>
-      <BaseCard>
-        <template #title>
-          <BaseSectionHeader>
             <MdiDatabase class="mr-2" />
             <span> {{ $t("tools.import_export") }} </span>
             <template #description>
@@ -133,21 +109,10 @@
           </BaseSectionHeader>
         </template>
         <div class="divide-y border-t px-6 pb-3">
-          <DetailAction @action="ensureAssetIDs">
-            <template #title>{{ $t("tools.actions_set.ensure_ids") }}</template>
-            {{ $t("tools.actions_set.ensure_ids_sub") }}
-            <template #button> {{ $t("tools.actions_set.ensure_ids_button") }} </template>
-          </DetailAction>
           <DetailAction @action="ensureImportRefs">
             <template #title>{{ $t("tools.actions_set.ensure_import_refs") }}</template>
             {{ $t("tools.actions_set.ensure_import_refs_sub") }}
             <template #button> {{ $t("tools.actions_set.ensure_import_refs_button") }} </template>
-          </DetailAction>
-          <DetailAction @action="resetItemDateTimes">
-            <template #title> {{ $t("tools.actions_set.zero_datetimes") }} </template>
-            <!-- eslint-disable-next-line vue/no-v-html -->
-            <div v-html="DOMPurify.sanitize($t('tools.actions_set.zero_datetimes_sub'))" />
-            <template #button> {{ $t("tools.actions_set.zero_datetimes_button") }} </template>
           </DetailAction>
           <DetailAction @action="setPrimaryPhotos">
             <template #title> {{ $t("tools.actions_set.set_primary_photo") }} </template>
@@ -161,12 +126,6 @@
             <div v-html="DOMPurify.sanitize($t('tools.actions_set.create_missing_thumbnails_sub'))" />
             <template #button> {{ $t("tools.actions_set.create_missing_thumbnails_button") }} </template>
           </DetailAction>
-          <DetailAction @action="wipeInventory">
-            <template #title> {{ $t("tools.actions_set.wipe_inventory") }} </template>
-            <!-- eslint-disable-next-line vue/no-v-html -->
-            <div v-html="DOMPurify.sanitize($t('tools.actions_set.wipe_inventory_sub'))" />
-            <template #button> {{ $t("tools.actions_set.wipe_inventory_button") }} </template>
-          </DetailAction>
         </div>
       </BaseCard>
     </BaseContainer>
@@ -177,8 +136,6 @@
   import DOMPurify from "dompurify";
   import { useI18n } from "vue-i18n";
   import { toast } from "@/components/ui/sonner";
-  import MdiFileChart from "~icons/mdi/file-chart";
-  import MdiArrowRight from "~icons/mdi/arrow-right";
   import MdiDatabase from "~icons/mdi/database";
   import MdiAlert from "~icons/mdi/alert";
   import MdiPackageVariant from "~icons/mdi/package-variant";
@@ -206,37 +163,9 @@
 
   const api = useUserApi();
   const confirm = useConfirm();
-  const pubApi = usePublicApi();
-  const { data: status } = useAsyncData(async () => {
-    const { data } = await pubApi.status();
-    return data;
-  });
-
-  const getBillOfMaterials = () => {
-    const url = api.reports.billOfMaterialsURL(prefs.value.collectionId ?? undefined);
-    window.open(url, "_blank");
-  };
-
   const getExportCSV = () => {
     const url = api.items.exportURL(prefs.value.collectionId ?? undefined);
     window.open(url, "_blank");
-  };
-
-  const ensureAssetIDs = async () => {
-    const { isCanceled } = await confirm.open(t("tools.actions_set.ensure_ids_confirm"));
-
-    if (isCanceled) {
-      return;
-    }
-
-    const result = await api.actions.ensureAssetIDs();
-
-    if (result.error) {
-      toast.error(t("tools.toast.failed_ensure_ids"));
-      return;
-    }
-
-    toast.success(t("tools.toast.asset_success", { results: result.data.completed }));
   };
 
   const createMissingThumbnails = async () => {
@@ -267,23 +196,6 @@
 
     if (result.error) {
       toast.error(t("tools.toast.failed_ensure_import_refs"));
-      return;
-    }
-
-    toast.success(t("tools.toast.asset_success", { results: result.data.completed }));
-  };
-
-  const resetItemDateTimes = async () => {
-    const { isCanceled } = await confirm.open(t("tools.actions_set.zero_datetimes_confirm"));
-
-    if (isCanceled) {
-      return;
-    }
-
-    const result = await api.actions.resetItemDateTimes();
-
-    if (result.error) {
-      toast.error(t("tools.toast.failed_zero_datetimes"));
       return;
     }
 
@@ -390,32 +302,4 @@
     }
     toast.success(t("tools.toast.restore_started"));
   }
-
-  const wipeInventory = async () => {
-    if (status.value?.demo) {
-      await confirm.open(t("tools.demo_mode_error.wipe_inventory"));
-      return;
-    }
-
-    openDialog(DialogID.WipeInventory, {
-      onClose: async result => {
-        if (!result) {
-          return;
-        }
-
-        const apiResult = await api.actions.wipeInventory({
-          wipeTags: result.wipeTags,
-          wipeLocations: result.wipeLocations,
-          wipeMaintenance: result.wipeMaintenance,
-        });
-
-        if (apiResult.error) {
-          toast.error(t("tools.toast.failed_wipe_inventory"));
-          return;
-        }
-
-        toast.success(t("tools.toast.wipe_inventory_success", { results: apiResult.data.completed }));
-      },
-    });
-  };
 </script>

@@ -24,11 +24,6 @@ export function statCardData(api: UserClient) {
   return computed(() => {
     return [
       {
-        label: t("home.total_value"),
-        value: statistics.value?.totalItemPrice || 0,
-        type: "currency",
-      },
-      {
         label: t("home.total_items"),
         value: statistics.value?.totalItems || 0,
         type: "number",

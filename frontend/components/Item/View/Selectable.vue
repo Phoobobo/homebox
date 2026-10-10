@@ -10,7 +10,6 @@
   import { makeColumns } from "./table/columns";
   import { useI18n } from "vue-i18n";
   import type { Pagination } from "./pagination";
-  import MaintenanceEditModal from "@/components/Maintenance/EditModal.vue";
   import ItemChangeDetails from "./ItemChangeDetails.vue";
 
   const props = defineProps<{
@@ -52,7 +51,6 @@
 
 <template>
   <section>
-    <MaintenanceEditModal />
     <ItemChangeDetails />
 
     <BaseSectionHeader class="flex items-center justify-between" :class="{ 'mb-2 mt-4': !externalPagination }">

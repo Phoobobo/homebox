@@ -27,7 +27,7 @@
 
   const columns = computed(() =>
     makeColumns({ t })
-      .filter(c => ["name", "quantity", "location"].includes(c.id ?? ""))
+      .filter(c => ["name", "location"].includes(c.id ?? ""))
       .map(column =>
         column.id !== "location"
           ? column

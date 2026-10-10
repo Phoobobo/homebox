@@ -18,11 +18,9 @@
     BreadcrumbSeparator,
   } from "@/components/ui/breadcrumb";
   import { Button } from "@/components/ui/button";
-  import { Badge } from "@/components/ui/badge";
   import { Separator } from "@/components/ui/separator";
   import { DialogID } from "~/components/ui/dialog-provider/utils";
   import BaseCard from "@/components/Base/Card.vue";
-  import Currency from "~/components/global/Currency.vue";
   import DateTime from "~/components/global/DateTime.vue";
   import LabelMaker from "~/components/global/LabelMaker.vue";
   import Markdown from "~/components/global/Markdown.vue";
@@ -266,10 +264,6 @@
               </Breadcrumb>
               <h1 class="flex items-center gap-3 pb-1 text-2xl">
                 {{ location ? location.name : "" }}
-
-                <Badge v-if="location && location.totalPrice" variant="secondary">
-                  <Currency :amount="location.totalPrice" />
-                </Badge>
               </h1>
               <div class="flex flex-wrap gap-1 text-xs">
                 <div>
@@ -309,13 +303,13 @@
       </Card>
 
       <!-- Details (notes, custom fields) -->
-      <BaseCard v-if="locationDetails.length > 0" class="mt-4">
+      <BaseCard v-if="false && locationDetails.length > 0" class="mt-4">
         <template #title> {{ $t("global.details") }} </template>
         <DetailsSection :details="locationDetails" />
       </BaseCard>
 
       <!-- Attachments (non-photo) -->
-      <BaseCard v-if="hasNonPhotoAttachments" class="mt-4">
+      <BaseCard v-if="false && hasNonPhotoAttachments" class="mt-4">
         <template #title> {{ $t("items.attachments") }} </template>
         <div class="border-t px-4 py-2">
           <ItemAttachmentsList

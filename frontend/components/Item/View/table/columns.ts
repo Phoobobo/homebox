@@ -1,12 +1,11 @@
 import type { Column, ColumnDef } from "@tanstack/vue-table";
 import { h } from "vue";
 import DropdownAction from "./data-table-dropdown.vue";
-import { ArrowDown, ArrowUpDown, Check, X } from "lucide-vue-next";
+import { ArrowDown, ArrowUpDown } from "lucide-vue-next";
 import Button from "~/components/ui/button/Button.vue";
 import Checkbox from "~/components/Form/Checkbox.vue";
 import type { EntitySummary } from "~/lib/api/types/data-contracts";
 
-import Currency from "~/components/global/Currency.vue";
 import DateTime from "~/components/global/DateTime.vue";
 import { cn } from "~/lib/utils";
 
@@ -64,20 +63,6 @@ export function makeColumns({
       enableHiding: false,
     },
     {
-      id: "assetId",
-      accessorKey: "assetId",
-      header: ({ column }) =>
-        h(
-          Button,
-          {
-            variant: "ghost",
-            onClick: () => !disableSort && column.toggleSorting(column.getIsSorted() === "asc"),
-          },
-          () => sortable(column, "items.asset_id")
-        ),
-      cell: ({ row }) => h("div", { class: "text-sm" }, String(row.getValue("assetId") ?? "")),
-    },
-    {
       id: "name",
       accessorKey: "name",
       header: ({ column }) =>
@@ -90,56 +75,6 @@ export function makeColumns({
           () => sortable(column, "items.name")
         ),
       cell: ({ row }) => h("span", { class: "text-sm font-medium" }, row.getValue("name")),
-    },
-    {
-      id: "quantity",
-      accessorKey: "quantity",
-      header: ({ column }) =>
-        h(
-          Button,
-          {
-            variant: "ghost",
-            onClick: () => !disableSort && column.toggleSorting(column.getIsSorted() === "asc"),
-          },
-          () => sortable(column, "items.quantity")
-        ),
-      cell: ({ row }) => h("div", { class: "text-center" }, String(row.getValue("quantity") ?? "")),
-    },
-    {
-      id: "insured",
-      accessorKey: "insured",
-      header: ({ column }) =>
-        h(
-          Button,
-          {
-            variant: "ghost",
-            onClick: () => !disableSort && column.toggleSorting(column.getIsSorted() === "asc"),
-          },
-          () => sortable(column, "items.insured")
-        ),
-      cell: ({ row }) => {
-        const val = row.getValue("insured");
-        return h(
-          "div",
-          { class: "block mx-auto w-min" },
-          val ? h(Check, { class: "h-4 w-4 text-green-500" }) : h(X, { class: "h-4 w-4 text-destructive" })
-        );
-      },
-    },
-    {
-      id: "purchasePrice",
-      accessorKey: "purchasePrice",
-      header: ({ column }) =>
-        h(
-          Button,
-          {
-            variant: "ghost",
-            onClick: () => !disableSort && column.toggleSorting(column.getIsSorted() === "asc"),
-          },
-          () => sortable(column, "items.purchase_price")
-        ),
-      cell: ({ row }) =>
-        h("div", { class: "text-center" }, h(Currency, { amount: Number(row.getValue("purchasePrice")) })),
     },
     {
       id: "location",
@@ -160,27 +95,6 @@ export function makeColumns({
           return h("a", { href: `/location/${loc.id}`, class: "hover:underline text-sm" }, loc.name);
         }
         return h("div", { class: "text-sm text-muted-foreground" }, "");
-      },
-    },
-    {
-      id: "archived",
-      accessorKey: "archived",
-      header: ({ column }) =>
-        h(
-          Button,
-          {
-            variant: "ghost",
-            onClick: () => !disableSort && column.toggleSorting(column.getIsSorted() === "asc"),
-          },
-          () => sortable(column, "items.archived")
-        ),
-      cell: ({ row }) => {
-        const val = row.getValue("archived");
-        return h(
-          "div",
-          { class: "block mx-auto w-min" },
-          val ? h(Check, { class: "h-4 w-4 text-green-500" }) : h(X, { class: "h-4 w-4 text-destructive" })
-        );
       },
     },
     {

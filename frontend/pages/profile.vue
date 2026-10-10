@@ -422,9 +422,6 @@
             <NuxtLink to="/collection/settings" class="text-primary underline">
               {{ $t("profile.moved_notice_link_settings") }}
             </NuxtLink>
-            <NuxtLink to="/collection/notifiers" class="text-primary underline">
-              {{ $t("profile.moved_notice_link_notifiers") }}
-            </NuxtLink>
             <NuxtLink to="/collection/invites" class="text-primary underline">
               {{ $t("profile.moved_notice_link_invites") }}
             </NuxtLink>

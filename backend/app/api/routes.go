@@ -149,7 +149,6 @@ func (a *app) mountRoutes(r *chi.Mux, chain *errchain.ErrChain, repos *repo.AllR
 		r.Get("/groups/statistics/tags", chain.ToHandlerFunc(v1Ctrl.HandleGroupStatisticsTags(), userMW...))
 
 		// Action endpoints
-		r.Post("/actions/ensure-asset-ids", chain.ToHandlerFunc(v1Ctrl.HandleEnsureAssetID(), userMW...))
 		r.Post("/actions/zero-item-time-fields", chain.ToHandlerFunc(v1Ctrl.HandleItemDateZeroOut(), userMW...))
 		r.Post("/actions/ensure-import-refs", chain.ToHandlerFunc(v1Ctrl.HandleEnsureImportRefs(), userMW...))
 		r.Post("/actions/set-primary-photos", chain.ToHandlerFunc(v1Ctrl.HandleSetPrimaryPhotos(), userMW...))
@@ -191,31 +190,7 @@ func (a *app) mountRoutes(r *chi.Mux, chain *errchain.ErrChain, repos *repo.AllR
 		r.Put("/entities/{id}/attachments/{attachment_id}", chain.ToHandlerFunc(v1Ctrl.HandleEntityAttachmentUpdate(), userMW...))
 		r.Delete("/entities/{id}/attachments/{attachment_id}", chain.ToHandlerFunc(v1Ctrl.HandleEntityAttachmentDelete(), userMW...))
 
-		// Entity maintenance endpoints
-		r.Get("/entities/{id}/maintenance", chain.ToHandlerFunc(v1Ctrl.HandleMaintenanceLogGet(), userMW...))
-		r.Post("/entities/{id}/maintenance", chain.ToHandlerFunc(v1Ctrl.HandleMaintenanceEntryCreate(), userMW...))
-
 		r.Get("/assets/{id}", chain.ToHandlerFunc(v1Ctrl.HandleAssetGet(), userMW...))
-
-		// Entity Templates
-		r.Get("/templates", chain.ToHandlerFunc(v1Ctrl.HandleEntityTemplatesGetAll(), userMW...))
-		r.Post("/templates", chain.ToHandlerFunc(v1Ctrl.HandleEntityTemplatesCreate(), userMW...))
-		r.Get("/templates/{id}", chain.ToHandlerFunc(v1Ctrl.HandleEntityTemplatesGet(), userMW...))
-		r.Put("/templates/{id}", chain.ToHandlerFunc(v1Ctrl.HandleEntityTemplatesUpdate(), userMW...))
-		r.Delete("/templates/{id}", chain.ToHandlerFunc(v1Ctrl.HandleEntityTemplatesDelete(), userMW...))
-		r.Post("/templates/{id}/create-item", chain.ToHandlerFunc(v1Ctrl.HandleEntityTemplatesCreateItem(), userMW...))
-
-		// Maintenance
-		r.Get("/maintenance", chain.ToHandlerFunc(v1Ctrl.HandleMaintenanceGetAll(), userMW...))
-		r.Put("/maintenance/{id}", chain.ToHandlerFunc(v1Ctrl.HandleMaintenanceEntryUpdate(), userMW...))
-		r.Delete("/maintenance/{id}", chain.ToHandlerFunc(v1Ctrl.HandleMaintenanceEntryDelete(), userMW...))
-
-		// Notifiers
-		r.Get("/notifiers", chain.ToHandlerFunc(v1Ctrl.HandleGetUserNotifiers(), userMW...))
-		r.Post("/notifiers", chain.ToHandlerFunc(v1Ctrl.HandleCreateNotifier(), userMW...))
-		r.Put("/notifiers/{id}", chain.ToHandlerFunc(v1Ctrl.HandleUpdateNotifier(), userMW...))
-		r.Delete("/notifiers/{id}", chain.ToHandlerFunc(v1Ctrl.HandleDeleteNotifier(), userMW...))
-		r.Post("/notifiers/test", chain.ToHandlerFunc(v1Ctrl.HandlerNotifierTest(), append(userMW, a.notifierTestLimiter.middleware)...))
 
 		// Asset-Like endpoints
 		assetMW := []errchain.Middleware{
@@ -223,8 +198,6 @@ func (a *app) mountRoutes(r *chi.Mux, chain *errchain.ErrChain, repos *repo.AllR
 			a.mwTenant,
 			a.mwRoles(RoleModeOr, authroles.RoleUser.String(), authroles.RoleAttachments.String()),
 		}
-
-		r.Get("/products/search-from-barcode", chain.ToHandlerFunc(v1Ctrl.HandleProductSearchFromBarcode(a.conf.Barcode), userMW...))
 
 		r.Get("/qrcode", chain.ToHandlerFunc(v1Ctrl.HandleGenerateQRCode(), assetMW...))
 		r.Get(
@@ -237,9 +210,6 @@ func (a *app) mountRoutes(r *chi.Mux, chain *errchain.ErrChain, repos *repo.AllR
 		r.Get("/labelmaker/location/{id}", chain.ToHandlerFunc(v1Ctrl.HandleGetLocationLabel(), userMW...))
 		r.Get("/labelmaker/item/{id}", chain.ToHandlerFunc(v1Ctrl.HandleGetItemLabel(), userMW...))
 		r.Get("/labelmaker/asset/{id}", chain.ToHandlerFunc(v1Ctrl.HandleGetAssetLabel(), userMW...))
-
-		// Reporting Services
-		r.Get("/reporting/bill-of-materials", chain.ToHandlerFunc(v1Ctrl.HandleBillOfMaterialsExport(), userMW...))
 
 		// OpenTelemetry proxy endpoint for frontend telemetry (requires auth)
 		if a.otel != nil && a.otel.IsEnabled() && a.conf.Otel.ProxyEnabled {

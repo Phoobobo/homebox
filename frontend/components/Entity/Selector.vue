@@ -4,13 +4,16 @@
       <SelectValue :class="{ 'text-xl': size === 'sm' }" :placeholder="$t('components.entity.selector.placeholder')" />
     </SelectTrigger>
     <SelectContent>
-      <SelectItem v-for="type in entityTypes" :key="type.id" :value="type.id" @click="onEntityTypeChanged(type.id)">
+      <SelectItem
+        v-for="type in householdEntityTypes(entityTypes)"
+        :key="type.id"
+        :value="type.id"
+        @click="onEntityTypeChanged(type.id)"
+      >
         <div class="flex items-center gap-2">
           <MdiMapMarkerOutline v-if="type.isLocation" class="size-4" />
           <MdiPackageVariantClosed v-else class="size-4" />
-          <span>{{
-            type.name === "Item" ? t("global.item") : type.name === "Location" ? t("global.location") : type.name
-          }}</span>
+          <span>{{ type.isLocation ? t("global.location") : t("global.item") }}</span>
         </div>
       </SelectItem>
     </SelectContent>
@@ -18,6 +21,7 @@
 </template>
 
 <script setup lang="ts">
+  import { householdEntityTypes } from "~/lib/data/household";
   import { useI18n } from "vue-i18n";
   import MdiMapMarkerOutline from "~icons/mdi/map-marker-outline";
   import MdiPackageVariantClosed from "~icons/mdi/package-variant-closed";

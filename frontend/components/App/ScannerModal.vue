@@ -14,7 +14,7 @@
           <span class="text-sm font-medium">{{ errorMessage }}</span>
         </div>
         <div
-          v-if="detectedBarcode"
+          v-if="false && detectedBarcode"
           class="mb-5 flex flex-col items-center gap-2 rounded-md border border-accent-foreground bg-accent p-4 text-accent-foreground"
           role="alert"
         >
@@ -193,7 +193,8 @@
               case BarcodeFormat.UPC_E:
               case BarcodeFormat.UPC_EAN_EXTENSION:
                 console.info("Barcode detected");
-                detectedBarcode.value = result.getText();
+                // Household mode ignores product barcodes.
+                detectedBarcode.value = "";
                 detectedBarcodeType.value = BarcodeFormat[bcfmt].replaceAll("_", "-");
                 break;
 

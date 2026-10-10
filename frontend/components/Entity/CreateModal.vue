@@ -224,7 +224,7 @@
 
 <script setup lang="ts">
   import { useI18n } from "vue-i18n";
-  import { householdItemMode } from "~/lib/data/household";
+  import { householdEntityTypes, householdItemMode } from "~/lib/data/household";
   import { DialogID } from "@/components/ui/dialog-provider/utils";
   import { toast } from "@/components/ui/sonner";
   import { Button, ButtonGroup } from "~/components/ui/button";
@@ -323,12 +323,16 @@
   const nameInput = ref<HTMLInputElement | null>(null);
 
   // Entity type selection
-  const entityTypes = computed(() => entityTypeStore.allTypes);
+  const entityTypes = computed(() => householdEntityTypes(entityTypeStore.allTypes));
   const selectedEntityType = ref<EntityTypeSummary | null>(null);
 
   async function onEntityTypeChanged(typeId: string) {
     const et = entityTypes.value.find(t => t.id === typeId);
     selectedEntityType.value = et || null;
+    if (householdItemMode) {
+      clearTemplate();
+      return;
+    }
 
     // A template the user picked explicitly takes precedence over the entity
     // type's default template, so don't overwrite it when the type changes.
@@ -434,6 +438,7 @@
   }
 
   async function restoreLastTemplate() {
+    if (householdItemMode) return;
     const lastTemplateId = localStorage.getItem(LAST_TEMPLATE_KEY);
     if (!lastTemplateId) return;
 

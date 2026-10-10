@@ -198,7 +198,7 @@
       return;
     }
 
-    uploadAttachment([first], null);
+    uploadAttachment([first], AttachmentTypes.Photo);
   }
 
   const dropPhoto = (files: File[] | null) => uploadAttachment(files, AttachmentTypes.Photo);
@@ -327,7 +327,7 @@
         </DialogHeader>
 
         <FormTextField v-model="editState.title" :label="$t('items.edit.edit_attachment_dialog.attachment_title')" />
-        <div>
+        <div v-if="false">
           <Label for="attachment-type"> {{ $t("items.edit.edit_attachment_dialog.attachment_type") }} </Label>
           <Select id="attachment-type" v-model:model-value="editState.type">
             <SelectTrigger>
@@ -370,7 +370,7 @@
           'top-1': preferences.displayLegacyHeader,
         }"
       >
-        <TooltipProvider :delay-duration="0">
+        <TooltipProvider v-if="false" :delay-duration="0">
           <Tooltip>
             <TooltipTrigger as-child>
               <Label class="flex cursor-pointer items-center gap-2 backdrop-blur-sm">
@@ -391,9 +391,13 @@
         <BaseCard class="overflow-visible">
           <template #title> {{ $t("locations.update_location") }} </template>
           <div class="mb-6 grid gap-4 border-t px-5 pt-2 md:grid-cols-2">
-            <LocationSelector v-model="parent" label="Parent Location" :current-location="item" />
+            <LocationSelector
+              v-model="parent"
+              :label="$t('components.entity.create_modal.parent_location')"
+              :current-location="item"
+            />
             <TagSelector v-model="item.tagIds" :tags="tags" />
-            <div class="flex flex-col gap-1">
+            <div v-if="false" class="flex flex-col gap-1">
               <Label class="px-1">{{ $t("global.entity_type") }}</Label>
               <EntitySelector
                 :entity-types="entityTypeStore.allTypes"
@@ -404,7 +408,11 @@
           </div>
 
           <div class="border-t sm:p-0">
-            <div v-for="field in mainFields" :key="field.ref" class="grid grid-cols-1 sm:divide-y">
+            <div
+              v-for="field in mainFields.filter(field => ['name', 'description'].includes(field.ref))"
+              :key="field.ref"
+              class="grid grid-cols-1 sm:divide-y"
+            >
               <div class="border-b px-4 pb-4 pt-2 sm:px-6">
                 <FormTextArea
                   v-if="field.type === 'textarea'"
@@ -449,7 +457,7 @@
           </div>
         </BaseCard>
 
-        <BaseCard v-if="preferences.editorAdvancedView">
+        <BaseCard v-if="false && preferences.editorAdvancedView">
           <template #title> {{ $t("items.custom_fields") }} </template>
           <div class="space-y-4 divide-y border-t px-5">
             <div
@@ -478,20 +486,20 @@
 
         <Card ref="attDropZone" class="overflow-visible shadow-xl">
           <div class="px-4 py-5 sm:px-6">
-            <h3 class="text-lg font-medium leading-6">{{ $t("items.attachments") }}</h3>
+            <h3 class="text-lg font-medium leading-6">{{ $t("items.photos") }}</h3>
             <p class="text-xs">{{ $t("items.changes_persisted_immediately") }}</p>
           </div>
           <div class="border-t p-4">
-            <div v-if="attDropZoneActive" class="grid grid-cols-2 gap-4">
+            <div v-if="attDropZoneActive" class="grid grid-cols-1 gap-4">
               <DropZone @drop="dropPhoto"> {{ $t("items.photos") }} </DropZone>
-              <DropZone @drop="dropAttachment"> {{ $t("items.attachments") }} </DropZone>
+              <DropZone v-if="false" @drop="dropAttachment"> {{ $t("items.photos") }} </DropZone>
             </div>
             <button
               v-else
               class="grid h-24 w-full place-content-center border-2 border-dashed border-primary"
               @click="clickUpload"
             >
-              <input ref="refAttachmentInput" hidden type="file" @change="uploadImage" />
+              <input ref="refAttachmentInput" hidden accept="image/*" type="file" @change="uploadImage" />
               <p>{{ $t("items.drag_and_drop") }}</p>
             </button>
           </div>
@@ -499,7 +507,7 @@
           <div class="border-t p-4">
             <ul role="list" class="divide-y rounded-md border">
               <li
-                v-for="attachment in item.attachments"
+                v-for="attachment in item.attachments.filter(a => a.type === 'photo')"
                 :key="attachment.id"
                 class="grid grid-cols-6 justify-between py-3 pl-3 pr-4 text-sm"
               >
