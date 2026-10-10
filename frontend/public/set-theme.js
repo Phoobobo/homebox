@@ -1,10 +1,9 @@
 try {
-  console.log("Setting theme");
-  const theme = JSON.parse(localStorage.getItem("homebox/preferences/location")).theme;
-  if (theme) {
-    document.documentElement.setAttribute("data-theme", theme);
-    document.documentElement.classList.add("theme-" + theme);
-  }
-} catch (e) {
-  console.error("Failed to set theme", e);
+  const preferences = JSON.parse(localStorage.getItem("homebox/preferences/location") || "null");
+  const theme = preferences?.theme || "cupcake";
+  document.documentElement.setAttribute("data-theme", theme);
+  document.documentElement.classList.add("theme-" + theme);
+} catch {
+  document.documentElement.setAttribute("data-theme", "cupcake");
+  document.documentElement.classList.add("theme-cupcake");
 }
