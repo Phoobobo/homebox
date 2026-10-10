@@ -21,7 +21,7 @@
 
   const { t } = useI18n();
 
-  useHead({ title: `在哪儿 | ${t("collection.tabs.invites")}` });
+  useHead(() => ({ title: `${t("app.name")} | ${t("collection.tabs.invites")}` }));
 
   const api = useUserApi();
   const { openDialog } = useDialog();

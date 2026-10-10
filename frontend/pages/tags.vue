@@ -18,9 +18,9 @@
 
   const { t } = useI18n();
 
-  useHead({
-    title: "在哪儿 | " + t("global.tags"),
-  });
+  useHead(() => ({
+    title: t("app.name") + " | " + t("global.tags"),
+  }));
 
   const api = useUserApi();
 

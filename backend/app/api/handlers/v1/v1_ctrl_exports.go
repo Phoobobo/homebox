@@ -132,7 +132,7 @@ func (ctrl *V1Controller) HandleExportDownload() errchain.HandlerFunc {
 
 		w.Header().Set("Content-Type", "application/zip")
 		w.Header().Set("Content-Disposition",
-			fmt.Sprintf(`attachment; filename="homebox-export-%s.zip"`, out.ID.String()))
+			fmt.Sprintf(`attachment; filename="zainaer-export-%s.zip"`, out.ID.String()))
 		w.Header().Set("Content-Length", fmt.Sprintf("%d", out.SizeBytes))
 		w.WriteHeader(http.StatusOK)
 		_, err = io.Copy(w, reader)

@@ -1,0 +1,21 @@
+{
+  "name": "zainaer",
+  "short_name": "zainaer",
+  "description": "Find your household items",
+  "lang": "en",
+  "display": "standalone",
+  "start_url": "/home",
+  "theme_color": "#5b7f67",
+  "icons": [
+    {
+      "src": "/pwa-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/pwa-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -21,9 +21,9 @@
     middleware: ["auth"],
   });
 
-  useHead({
-    title: "在哪儿 | " + t("menu.locations"),
-  });
+  useHead(() => ({
+    title: t("app.name") + " | " + t("menu.locations"),
+  }));
 
   const api = useUserApi();
 

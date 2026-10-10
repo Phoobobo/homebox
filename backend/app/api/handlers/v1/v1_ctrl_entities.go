@@ -567,7 +567,7 @@ func (ctrl *V1Controller) HandleEntitiesExport() errchain.HandlerFunc {
 		span.SetAttributes(attribute.Int("csv.rows.count", len(csvData)))
 
 		timestamp := time.Now().Format("2006-01-02_15-04-05")
-		filename := fmt.Sprintf("homebox-entities_%s.csv", timestamp)
+		filename := fmt.Sprintf("zainaer-items_%s.csv", timestamp)
 
 		w.Header().Set("Content-Type", "text/csv")
 		w.Header().Set("Content-Disposition", fmt.Sprintf("attachment;filename=%s", filename))

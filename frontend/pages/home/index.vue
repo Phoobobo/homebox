@@ -18,9 +18,9 @@
   definePageMeta({
     middleware: ["auth"],
   });
-  useHead({
-    title: "在哪儿 | " + t("menu.home"),
-  });
+  useHead(() => ({
+    title: t("app.name") + " | " + t("menu.home"),
+  }));
 
   const api = useUserApi();
   const breakpoints = useBreakpoints();

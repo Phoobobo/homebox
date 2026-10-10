@@ -1,4 +1,5 @@
 {
+    "app": { "name": "在哪儿" },
     "collection": {
         "copy_invite": "复制邀请链接",
         "create_invite": "创建邀请",
@@ -906,8 +907,8 @@
             "bordered_labels": "标签边框",
             "generate_page": "生成标签页",
             "input_placeholder": "在此输入",
-            "instruction_1": "HomeBox 标签生成器是一个帮助您打印 Homebox 库存标签的工具。这些标签是\n预打印的设计，这样您就可以一次性打印出多张标签，并可以随时将它们粘贴到物品上",
-            "instruction_2": "因此，这些标签会打印一个 URL 的二维码以及资产ID信息来完成工作。\n如果您在 HomeBox 设置中禁用了资产ID，您仍然可以使用此工具，但资产编号将不会和任何物品相关",
+            "instruction_1": "在哪儿 标签生成器是一个帮助您打印 在哪儿 库存标签的工具。这些标签是\n预打印的设计，这样您就可以一次性打印出多张标签，并可以随时将它们粘贴到物品上",
+            "instruction_2": "因此，这些标签会打印一个 URL 的二维码以及资产ID信息来完成工作。\n如果您在 在哪儿 设置中禁用了资产ID，您仍然可以使用此工具，但资产编号将不会和任何物品相关",
             "instruction_3": "此功能处于早期开发阶段，可能会在未来版本中发生变化，如果您有反馈，请\n在'<a href=\"https://github.com/sysadminsmedia/homebox/discussions/53\">'GitHub讨论'</a>'中提供",
             "label_height": "标签高度",
             "label_width": "标签宽度",
@@ -920,12 +921,12 @@
             "page_width": "页面宽度",
             "print_location_row": "打印位置行",
             "qr_code_example": "二维码地址示例",
-            "replace_homebox_behavior": "替换“HomeBox”文本行为",
-            "replace_homebox_behavior_always_replace": "始终替换“HomeBox”",
-            "replace_homebox_behavior_item_no_location": "物品没有位置时替换“HomeBox”",
-            "replace_homebox_behavior_item_no_name": "物品没有名称时替换“HomeBox”",
-            "replace_homebox_behavior_item_no_name_no_location": "物品没有名称和位置时替换“HomeBox”",
-            "replace_homebox_behavior_show_homebox": "显示“HomeBox”",
+            "replace_homebox_behavior": "替换“在哪儿”文本行为",
+            "replace_homebox_behavior_always_replace": "始终替换“在哪儿”",
+            "replace_homebox_behavior_item_no_location": "物品没有位置时替换“在哪儿”",
+            "replace_homebox_behavior_item_no_name": "物品没有名称时替换“在哪儿”",
+            "replace_homebox_behavior_item_no_name_no_location": "物品没有名称和位置时替换“在哪儿”",
+            "replace_homebox_behavior_show_homebox": "显示“在哪儿”",
             "replace_homebox_text": "替换文本",
             "skip_first_labels": "空出前几个标签位",
             "tip_1": "这里的默认设置是\n '<a href=\"https://www.avery.com/templates/5260\">'Avery 5260标签纸'</a>'的设置，\n 你需要根据你的标签纸调整大小设置。",
@@ -983,7 +984,7 @@
             "create_missing_thumbnails": "创建缺失的缩略图",
             "create_missing_thumbnails_button": "创建缩略图",
             "create_missing_thumbnails_confirm": "确定要生成缺失的缩略图吗？这可能需要一段时间，且无法暂停。",
-            "create_missing_thumbnails_sub": "为当前配置支持的所有附件生成缩略图。这对于在 Homebox v0.20.0 版本发布之前上传的附件尤其有用。该操作不会覆盖已有的缩略图，只会为尚未生成缩略图的附件创建新缩略图。请注意，缩略图是在后台生成的，可能需要一些时间才能完成。",
+            "create_missing_thumbnails_sub": "为尚无缩略图的照片生成缩略图，不覆盖已有缩略图。处理可能需要一些时间。",
             "ensure_ids": "确认资产ID",
             "ensure_ids_button": "确认资产ID",
             "ensure_ids_confirm": "确定要开始确认所有资产ID吗？这可能需要一段时间，且无法撤销。",
@@ -994,7 +995,7 @@
             "set_primary_photo": "设置封面",
             "set_primary_photo_button": "设置封面",
             "set_primary_photo_confirm": "确定要设置封面图片吗？这可能需要一段时间，且无法撤销。",
-            "set_primary_photo_sub": "在 Homebox v0.10.0 版本中，封面字段被添加到照片附件中。如果没有设置封面，则会将附件中第一张图片作为封面。 '<a class=\"link\" href=\"https://github.com/hay-kot/homebox/pull/576\">'更多请参考 GitHub PR #576'</a>'",
+            "set_primary_photo_sub": "为尚未设置封面的物品，将第一张照片设为封面。",
             "wipe_inventory": "清空库存",
             "wipe_inventory_button": "清空库存",
             "wipe_inventory_confirm": "确定要清空所有库存吗？这将删除所有物品，且无法撤销。",
@@ -1030,19 +1031,19 @@
         },
         "backups_sub": "将您的整个集合（包含实体，标签，附件和元数据）导出为便携的 zip 归档文件。您可以将归档文件还原到当前或其他服务器上新注册的空集合中。",
         "demo_mode_error": {
-            "wipe_inventory": "Homebox 处于演示模式时，无法清空库存、标签、位置和维护记录。请确认你不处于演示模式，然后再次尝试。"
+            "wipe_inventory": "在哪儿 处于演示模式时，无法清空库存、标签、位置和维护记录。请确认你不处于演示模式，然后再次尝试。"
         },
         "import_export": "导入/导出",
         "import_export_set": {
             "export": "导出库存",
             "export_button": "导出清单",
-            "export_sub": "按标准CSV格式导出Homebox。这将导出库存中的所有物品。",
+            "export_sub": "按标准CSV格式导出在哪儿。这将导出库存中的所有物品。",
             "import": "导入库存",
             "import_button": "导入库存",
             "import_ref_confirm": "确定要确保所有资产都有 import_ref 吗？这可能需要一段时间，且无法撤销。",
-            "import_sub": "Homebox只能导入标准的CSV格式文件。当 '<code>'HB.import_ref'</code>' 列不存在时，导入将 '<b>'不会'</b>' 覆盖库存中的任何现有物品，而是作为新物品添加。若现有物品的 import_ref 与文件中某行的 '<code>'HB.import_ref'</code>' 相同，则会将新旧数据进行合并。"
+            "import_sub": "在哪儿只能导入标准的CSV格式文件。当 '<code>'HB.import_ref'</code>' 列不存在时，导入将 '<b>'不会'</b>' 覆盖库存中的任何现有物品，而是作为新物品添加。若现有物品的 import_ref 与文件中某行的 '<code>'HB.import_ref'</code>' 相同，则会将新旧数据进行合并。"
         },
-        "import_export_sub": "按CSV格式导入和导出您的库存。在将库存迁移到Homebox的新实例时非常有用。",
+        "import_export_sub": "按CSV格式导入和导出您的库存。在将库存迁移到在哪儿的新实例时非常有用。",
         "reports": "报告",
         "reports_set": {
             "asset_labels": "资产ID标签",

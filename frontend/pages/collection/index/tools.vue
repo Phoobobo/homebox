@@ -70,7 +70,7 @@
                       v-if="b.status === 'completed'"
                       :href="downloadUrl(b.id)"
                       class="text-primary underline"
-                      :download="`homebox-export-${b.id}.zip`"
+                      :download="`zainaer-export-${b.id}.zip`"
                     >
                       {{ $t("tools.backups_set.download") }}
                     </a>
@@ -155,9 +155,9 @@
   definePageMeta({
     middleware: ["auth"],
   });
-  useHead({
-    title: "在哪儿 | " + t("collection.tabs.tools"),
-  });
+  useHead(() => ({
+    title: t("app.name") + " | " + t("collection.tabs.tools"),
+  }));
 
   const { openDialog } = useDialog();
 

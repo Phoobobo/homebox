@@ -32,9 +32,9 @@
   definePageMeta({
     middleware: ["auth"],
   });
-  useHead({
-    title: "在哪儿 | " + t("menu.profile"),
-  });
+  useHead(() => ({
+    title: t("app.name") + " | " + t("menu.profile"),
+  }));
 
   const api = useUserApi();
   const confirm = useConfirm();

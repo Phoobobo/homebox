@@ -13,7 +13,7 @@
 
   const { t } = useI18n();
 
-  useHead({ title: `在哪儿 | ${t("collection.tabs.members")}` });
+  useHead(() => ({ title: `${t("app.name")} | ${t("collection.tabs.members")}` }));
 
   const api = useUserApi();
   const auth = useAuthContext();

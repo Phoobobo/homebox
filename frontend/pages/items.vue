@@ -24,9 +24,9 @@
     middleware: ["auth"],
   });
 
-  useHead({
-    title: "在哪儿 | " + t("global.items"),
-  });
+  useHead(() => ({
+    title: t("app.name") + " | " + t("global.items"),
+  }));
 
   const searchLocked = ref(false);
   const queryParamsInitialized = ref(false);

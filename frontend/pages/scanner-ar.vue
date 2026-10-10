@@ -10,7 +10,7 @@
     layout: "empty",
   });
 
-  useHead({
-    title: "在哪儿 | AR Scanner",
-  });
+  useHead(() => ({
+    title: t("app.name") + " | AR Scanner",
+  }));
 </script>

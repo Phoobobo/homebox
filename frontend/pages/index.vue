@@ -17,9 +17,9 @@
 
   const { t } = useI18n();
 
-  useHead({
-    title: "在哪儿 | " + t("index.title"),
-  });
+  useHead(() => ({
+    title: t("app.name") + " | " + t("index.title"),
+  }));
 
   definePageMeta({
     layout: "empty",
@@ -239,7 +239,7 @@
         }"
       >
         <div class="z-10">
-          <h2 class="mt-1 flex text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">在哪儿</h2>
+          <h2 class="mt-1 flex text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">{{ $t("app.name") }}</h2>
           <p
             class="ml-1 text-lg"
             :class="{

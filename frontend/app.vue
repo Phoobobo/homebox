@@ -10,7 +10,7 @@
       <Link rel="apple-touch-icon" href="/apple-touch-icon.png" size="180x180" />
       <Link rel="mask-icon" href="/mask-icon.svg" color="#5b7f67" />
       <Meta name="theme-color" content="#5b7f67" />
-      <Link rel="manifest" href="/manifest.webmanifest" />
+      <Link rel="manifest" :href="locale === 'en' ? '/manifest-en.webmanifest' : '/manifest.webmanifest'" />
       <NuxtPage />
     </NuxtLayout>
   </DialogProvider>

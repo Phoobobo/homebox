@@ -1,4 +1,5 @@
 {
+    "app": { "name": "zainaer" },
     "collection": {
         "copy_invite": "Copy Invite Link",
         "create_invite": "Create Invite",
@@ -865,8 +866,8 @@
             "bordered_labels": "Bordered Labels",
             "generate_page": "Generate Page",
             "input_placeholder": "Type here",
-            "instruction_1": "The HomeBox Label Generator is a tool to help you print labels for your HomeBox inventory. These are intended to\n be print-ahead labels so you can print many labels and have them ready to apply",
-            "instruction_2": "As such, these labels work by printing a URL QR Code and AssetID information on a label. If you've disabled\n AssetID's in your HomeBox settings, you can still use this tool, but the AssetID's won't reference any item",
+            "instruction_1": "The zainaer Label Generator is a tool to help you print labels for your zainaer inventory. These are intended to\n be print-ahead labels so you can print many labels and have them ready to apply",
+            "instruction_2": "As such, these labels work by printing a URL QR Code and AssetID information on a label. If you've disabled\n AssetID's in your zainaer settings, you can still use this tool, but the AssetID's won't reference any item",
             "instruction_3": "This feature is in early development stages and may change in future releases, if you have feedback please\n provide it in the '<a href=\"https://github.com/sysadminsmedia/homebox/discussions/53\">'GitHub Discussion'</a>'",
             "label_height": "Label Height",
             "label_width": "Label Width",
@@ -879,12 +880,12 @@
             "page_width": "Page Width",
             "print_location_row": "Print Location Row",
             "qr_code_example": "QR Code Example",
-            "replace_homebox_behavior": "Replace \"HomeBox\" text behavior",
-            "replace_homebox_behavior_always_replace": "Always Replace \"HomeBox\"",
-            "replace_homebox_behavior_item_no_location": "Replace \"HomeBox\" when item has no location",
-            "replace_homebox_behavior_item_no_name": "Replace \"HomeBox\" when item has no name",
-            "replace_homebox_behavior_item_no_name_no_location": "Replace \"HomeBox\" when item has no name and no location",
-            "replace_homebox_behavior_show_homebox": "Show \"HomeBox\"",
+            "replace_homebox_behavior": "Replace \"zainaer\" text behavior",
+            "replace_homebox_behavior_always_replace": "Always Replace \"zainaer\"",
+            "replace_homebox_behavior_item_no_location": "Replace \"zainaer\" when item has no location",
+            "replace_homebox_behavior_item_no_name": "Replace \"zainaer\" when item has no name",
+            "replace_homebox_behavior_item_no_name_no_location": "Replace \"zainaer\" when item has no name and no location",
+            "replace_homebox_behavior_show_homebox": "Show \"zainaer\"",
             "replace_homebox_text": "Replacement text",
             "skip_first_labels": "Skip First Labels",
             "tip_1": "The defaults here are setup for the\n '<a href=\"https://www.avery.com/templates/5260\">'Avery 5260 label sheets'</a>'. If you're using a different sheet,\n you'll need to adjust the settings to match your sheet.",
@@ -942,7 +943,7 @@
             "create_missing_thumbnails": "Create Missing Thumbnails",
             "create_missing_thumbnails_button": "Create Thumbnails",
             "create_missing_thumbnails_confirm": "Are you sure you want to create missing thumbnails? This can take a while and cannot be paused.",
-            "create_missing_thumbnails_sub": "Creates thumbnails for all attachments that are supported by the current configuration. This is useful for attachments that were uploaded prior to the v0.20.0 release of Homebox. This will not overwrite existing thumbnails, only create new ones for attachments that do not have a thumbnail. Please note that the thumbnails are created in the background and may take a while to complete.",
+            "create_missing_thumbnails_sub": "Generate missing thumbnails for photos without replacing existing thumbnails. Processing may take some time.",
             "ensure_ids": "Ensure Asset IDs",
             "ensure_ids_button": "Ensure Asset IDs",
             "ensure_ids_confirm": "Are you sure you want to ensure all assets have an ID? This can take a while and cannot be undone.",
@@ -953,7 +954,7 @@
             "set_primary_photo": "Set Primary Photo",
             "set_primary_photo_button": "Set Primary Photo",
             "set_primary_photo_confirm": "Are you sure you want to set primary photos? This can take a while and cannot be undone.",
-            "set_primary_photo_sub": "In version v0.10.0 of Homebox, the primary image field was added to attachments of type photo. This action will set the primary image field to the first image in the attachments array in the database, if it is not already set. '<a class=\"link\" href=\"https://github.com/hay-kot/homebox/pull/576\">'See GitHub PR #576'</a>'",
+            "set_primary_photo_sub": "Set the first photo as the cover for items that do not have one yet.",
             "wipe_inventory": "Wipe Inventory",
             "wipe_inventory_button": "Wipe Inventory",
             "wipe_inventory_confirm": "Are you sure you want to wipe your entire inventory? This will delete all items and cannot be undone.",
@@ -989,19 +990,19 @@
         },
         "backups_sub": "Export your entire collection — entities, tags, attachments, and metadata — to a portable zip archive. Restore an archive into a freshly registered, empty collection on this or another server.",
         "demo_mode_error": {
-            "wipe_inventory": "Inventory, tags, locations and maintenance records cannot be wiped whilst Homebox is in demo mode. Please ensure that you are not in demo mode and try again."
+            "wipe_inventory": "Inventory, tags, locations and maintenance records cannot be wiped whilst zainaer is in demo mode. Please ensure that you are not in demo mode and try again."
         },
         "import_export": "Import/Export",
         "import_export_set": {
             "export": "Export Inventory",
             "export_button": "Export Inventory",
-            "export_sub": "Exports the standard CSV format for Homebox. This will export all items in your inventory.",
+            "export_sub": "Exports the standard CSV format for zainaer. This will export all items in your inventory.",
             "import": "Import Inventory",
             "import_button": "Import Inventory",
             "import_ref_confirm": "Are you sure you want to ensure all assets have an import_ref? This can take a while and cannot be undone.",
-            "import_sub": "Imports the standard CSV format for Homebox. Without an '<code>'HB.import_ref'</code>' column, this will '<b>'not'</b>' overwrite any existing items in your inventory, only add new items. Rows with an '<code>'HB.import_ref'</code>' column are merged into existing items with the same import_ref, if one exists."
+            "import_sub": "Imports the standard CSV format for zainaer. Without an '<code>'HB.import_ref'</code>' column, this will '<b>'not'</b>' overwrite any existing items in your inventory, only add new items. Rows with an '<code>'HB.import_ref'</code>' column are merged into existing items with the same import_ref, if one exists."
         },
-        "import_export_sub": "Import and export your inventory to and from a CSV file. This is useful for migrating your inventory to a new instance of Homebox.",
+        "import_export_sub": "Import and export your inventory to and from a CSV file. This is useful for migrating your inventory to a new instance of zainaer.",
         "reports": "Reports",
         "reports_set": {
             "asset_labels": "Asset ID Labels",

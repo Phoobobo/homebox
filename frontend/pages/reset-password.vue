@@ -11,9 +11,9 @@
 
   const { t } = useI18n();
 
-  useHead({
-    title: "在哪儿 | " + t("index.reset_password_title"),
-  });
+  useHead(() => ({
+    title: t("app.name") + " | " + t("index.reset_password_title"),
+  }));
 
   definePageMeta({
     layout: "empty",
@@ -59,7 +59,7 @@
 
 <template>
   <div class="flex min-h-screen flex-col items-center justify-center p-6">
-    <div class="mb-6 flex items-center gap-2 text-3xl font-bold tracking-tight">在哪儿</div>
+    <div class="mb-6 flex items-center gap-2 text-3xl font-bold tracking-tight">{{ $t("app.name") }}</div>
 
     <Card class="md:w-[460px]">
       <CardHeader>
