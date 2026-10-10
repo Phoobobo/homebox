@@ -300,7 +300,8 @@
             },
             "tree": {
                 "no_locations": "没有可用的位置。点击创建按钮新增位置。"
-            }
+            },
+            "create_item": "添加物品"
         },
         "quick_menu": {
             "no_results": "未找到结果。",
@@ -391,6 +392,86 @@
                 "updated": "模板已更新"
             },
             "using_template": "使用模板： {name}"
+        },
+        "entity": {
+            "selector": {
+                "placeholder": "选择类型…"
+            },
+            "create_modal": {
+                "entity_name": "{type}名称",
+                "entity_quantity": "{type}数量",
+                "entity_description": "{type}描述",
+                "entity_photo": "{type}照片 📷",
+                "upload_photos": "上传照片",
+                "uploaded": "已上传的照片",
+                "toast": {
+                    "already_creating": "正在创建{type}",
+                    "create_failed": "无法创建{type}",
+                    "create_success": "已创建{type}",
+                    "failed_load_parent": "加载上级物品失败，请手动选择",
+                    "no_canvas_support": "浏览器不支持画布操作",
+                    "please_select_entity_type": "请选择类型。",
+                    "please_select_location": "请选择位置。",
+                    "rotate_failed": "旋转图片失败：{ error }",
+                    "rotate_process_failed": "处理旋转后的图片失败",
+                    "some_photos_failed": "{count, plural, =0 {没有照片需要上传。} =1 {1 张照片上传失败。} other {部分照片上传失败。}}",
+                    "upload_failed": "上传照片失败：{ photoName }",
+                    "upload_success": "{count, plural, =0 {没有上传照片。} =1 {照片上传成功。} other {所有照片上传成功。}}",
+                    "uploading_photos": "{count, plural, =0 {没有照片需要上传} =1 {正在上传 1 张照片…} other {正在上传 {count} 张照片…}}"
+                },
+                "clear_template": "清除模板",
+                "delete_photo": "删除照片",
+                "parent_item": "上级物品",
+                "product_tooltip_input_barcode": "输入条形码以自动填写",
+                "product_tooltip_scan_barcode": "扫描条形码以自动填写 📷",
+                "rotate_photo": "旋转照片",
+                "set_as_primary_photo": "{ isPrimary, select, true {取消设为主照片} false {设为主照片} other {设为主照片}}",
+                "item_selector_no_results_text": "输入以搜索…"
+            }
+        },
+        "entityTypes": {
+            "create_dialog": {
+                "title": "创建对象类型",
+                "name_label": "名称",
+                "is_container_location_type_label": "属于容器／位置类型",
+                "button": "创建"
+            },
+            "update_dialog": {
+                "title": "更新对象类型",
+                "name_label": "名称",
+                "is_container_location_type_label": "属于容器／位置类型",
+                "button": "更新"
+            },
+            "page": {
+                "title": "对象类型",
+                "create": "创建",
+                "empty_title": "尚未定义对象类型。",
+                "empty_button": "创建对象类型"
+            },
+            "card": {
+                "default_template": "默认模板：{name}",
+                "badge_container": "容器",
+                "tooltip": {
+                    "edit": "编辑",
+                    "delete": "删除"
+                },
+                "actions": {
+                    "delete": "删除"
+                }
+            },
+            "toasts": {
+                "name_required": "名称不能为空",
+                "create_failed": "创建对象类型失败",
+                "create_success": "已创建对象类型",
+                "update_failed": "更新对象类型失败",
+                "update_success": "已更新对象类型",
+                "delete_confirm_failed": "删除对象类型失败，请确认没有对象正在使用该类型。",
+                "delete_success": "已删除对象类型"
+            },
+            "confirm": {
+                "convert_item_to_location": "将物品类型转换为位置类型，会导致使用该类型的对象丢失部分字段。确定继续吗？",
+                "delete_entity_type": "确定删除“{name}”吗？"
+            }
         }
     },
     "errors": {
@@ -449,7 +530,11 @@
         "value": "值",
         "version": "版本：{version}",
         "welcome": "欢迎，{username}",
-        "yes": "是"
+        "yes": "是",
+        "item": "物品",
+        "location": "位置",
+        "entity": "对象",
+        "entity_type": "对象类型"
     },
     "home": {
         "quick_statistics": "快速统计",
@@ -539,7 +624,8 @@
                 "select_type": "选择类型",
                 "title": "附件编辑"
             },
-            "view_image": "查看图片"
+            "view_image": "查看图片",
+            "change_entity_type_confirm": "更改对象类型可能导致当前类型与新类型之间不共有的字段数据丢失。确定更改吗？"
         },
         "edit_details": "编辑详情",
         "field": "字段",
@@ -660,7 +746,8 @@
         "zh-CN": "中文（简体）",
         "zh-HK": "中文（香港）",
         "zh-MO": "中文（澳门）",
-        "zh-TW": "中文（繁体）"
+        "zh-TW": "中文（繁体）",
+        "en@pirate": "英语（海盗风格）"
     },
     "languages.da-DK": "丹麦语",
     "languages.ro-RO": "罗马尼亚语",

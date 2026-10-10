@@ -13,6 +13,7 @@
   import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
   import { Button } from "@/components/ui/button";
   import LanguageSelector from "~/components/App/LanguageSelector.vue";
+  import LanguageQuickSwitch from "~/components/App/LanguageQuickSwitch.vue";
   import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
   import AppLogo from "~/components/App/Logo.vue";
   import FormTextField from "~/components/Form/TextField.vue";
@@ -298,7 +299,10 @@
               <TooltipContent>{{ $t("global.read_docs") }}</TooltipContent>
             </Tooltip>
 
-            <LanguageSelector class="z-10 text-primary" :expanded="false" />
+            <div class="flex flex-wrap items-center gap-2">
+              <LanguageQuickSwitch />
+              <LanguageSelector class="z-10 text-primary" :expanded="false" />
+            </div>
           </div>
         </TooltipProvider>
       </header>

@@ -53,10 +53,14 @@
                     if (btn.dialogId === DialogID.CreateEntity) {
                       if (btn.id == 0)
                         // create item
-                        openDialog(btn.dialogId, { params: { baseType: 'item' } });
+                        openDialog(btn.dialogId, {
+                          params: { baseType: 'item' },
+                        });
                       else if (btn.id == 1)
                         // create location
-                        openDialog(btn.dialogId, { params: { baseType: 'location' } });
+                        openDialog(btn.dialogId, {
+                          params: { baseType: 'location' },
+                        });
                     } else {
                       openDialog(btn.dialogId as NoParamDialogIDs);
                     }
@@ -173,6 +177,7 @@
           <div v-if="preferences.displayLegacyHeader">
             <AppHeaderDecor class="-mt-10 hidden lg:block" />
             <SidebarTrigger class="absolute left-2 top-2 hidden lg:flex" variant="default" />
+            <LanguageQuickSwitch class="absolute right-2 top-2 z-20 hidden lg:flex" />
           </div>
           <!-- IMPORTANT: if you change the height of this div, alter the top value in the item edit page-->
           <div
@@ -186,6 +191,7 @@
               <NuxtLink to="/home">
                 <AppHeaderText class="h-6" />
               </NuxtLink>
+              <LanguageQuickSwitch class="ml-auto" />
             </div>
             <div class="sm:grow" />
             <div class="flex h-1/2 grow items-center justify-end gap-2 sm:h-auto">
@@ -236,6 +242,7 @@
 
 <script lang="ts" setup>
   import { useI18n } from "vue-i18n";
+  import LanguageQuickSwitch from "~/components/App/LanguageQuickSwitch.vue";
   import DOMPurify from "dompurify";
   import { useTagStore } from "~/stores/tags";
   import { useLocationStore } from "~~/stores/locations";
