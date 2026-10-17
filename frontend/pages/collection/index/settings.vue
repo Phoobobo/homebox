@@ -23,7 +23,6 @@
 
   const group = ref<Group | null>(null);
   const name = ref("");
-  const currencyCode = ref("USD");
 
   const loadSettings = async () => {
     if (!selectedCollection.value) {
@@ -45,7 +44,6 @@
 
       group.value = res.data;
       name.value = res.data.name;
-      currencyCode.value = res.data.currency;
     } catch (e) {
       const msg = (e as Error).message ?? String(e);
       error.value = msg;
@@ -73,7 +71,7 @@
       const res = await api.group.update(
         {
           name: name.value,
-          currency: currencyCode.value,
+          currency: group.value?.currency || "USD",
         },
         selectedCollection.value.id
       );
@@ -86,7 +84,6 @@
       }
 
       group.value = res.data;
-      setCurrency(res.data.currency);
       toast.success(t("profile.toast.group_updated"));
 
       await reloadCollections();

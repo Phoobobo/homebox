@@ -5,13 +5,11 @@
   import { useTagStore } from "~/stores/tags";
   import { useLocationStore } from "~~/stores/locations";
   import BaseContainer from "@/components/Base/Container.vue";
-  import BaseCard from "@/components/Base/Card.vue";
   import Subtitle from "~/components/global/Subtitle.vue";
   import StatCard from "~/components/global/StatCard/StatCard.vue";
   import ItemCard from "~/components/Item/Card.vue";
   import LocationCard from "~/components/Location/Card.vue";
   import TagChip from "~/components/Tag/Chip.vue";
-  import Table from "~/components/Item/View/Table.vue";
 
   const { t } = useI18n();
 
@@ -23,7 +21,6 @@
   }));
 
   const api = useUserApi();
-  const breakpoints = useBreakpoints();
 
   const locationStore = useLocationStore();
   const locations = computed(() => locationStore.parentLocations);
@@ -37,7 +34,7 @@
 
 <template>
   <div>
-    <BaseContainer class="flex flex-col gap-4">
+    <BaseContainer class="flex flex-col gap-8">
       <section>
         <Subtitle> {{ $t("home.quick_statistics") }} </Subtitle>
         <div class="grid grid-cols-2 gap-2 md:grid-cols-3 md:gap-6">
@@ -48,18 +45,19 @@
       <section>
         <Subtitle> {{ $t("home.recently_added") }} </Subtitle>
 
-        <p v-if="itemTable.items.length === 0" class="ml-2 text-sm">{{ $t("items.no_results") }}</p>
-        <BaseCard v-else-if="breakpoints.lg">
-          <Table :items="itemTable.items" />
-        </BaseCard>
-        <div v-else class="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <p v-if="itemTable.items.length === 0" class="ml-2 text-sm">
+          {{ $t("items.no_results") }}
+        </p>
+        <div v-else class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
           <ItemCard v-for="item in itemTable.items" :key="item.id" :item="item" />
         </div>
       </section>
 
       <section>
         <Subtitle> {{ $t("home.storage_locations") }} </Subtitle>
-        <p v-if="locations.length === 0" class="ml-2 text-sm">{{ $t("locations.no_results") }}</p>
+        <p v-if="locations.length === 0" class="ml-2 text-sm">
+          {{ $t("locations.no_results") }}
+        </p>
         <div v-else class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
           <LocationCard v-for="location in locations" :key="location.id" :location="location" />
         </div>
@@ -67,9 +65,11 @@
 
       <section>
         <Subtitle> {{ $t("home.tags") }} </Subtitle>
-        <p v-if="tags.length === 0" class="ml-2 text-sm">{{ $t("tags.no_results") }}</p>
+        <p v-if="tags.length === 0" class="ml-2 text-sm">
+          {{ $t("tags.no_results") }}
+        </p>
         <div v-else class="flex flex-wrap gap-4">
-          <TagChip v-for="tag in tags" :key="tag.id" size="lg" :tag="tag" class="shadow-md" />
+          <TagChip v-for="tag in tags" :key="tag.id" size="sm" :tag="tag" />
         </div>
       </section>
     </BaseContainer>

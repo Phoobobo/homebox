@@ -1075,5 +1075,20 @@
         "no_tags": "尚未添加标签",
         "no_photos": "尚未添加照片",
         "no_description": "尚未填写描述"
-    }
+    },
+  "assistant": {
+    "title": "文字助手",
+    "subtitle": "用一句话描述你想找的物品，或想记录的位置。",
+    "disconnected": "尚未连接 AI 模型",
+    "greeting": "想找什么，或记下什么？",
+    "explanation": "可以先在下方输入文字。接入模型后，这里会支持自然语言查找物品和生成入库草稿。",
+    "example_find": "车钥匙放在哪儿了？",
+    "example_add": "把充电器放在书房左边第二个抽屉，标签是数码配件。",
+    "input": "对话内容",
+    "placeholder": "例如：帮我找一下红色公文箱……",
+    "keyword_search": "普通关键词搜索",
+    "send": "发送",
+    "not_ready": "AI 对话尚未开通，暂不能发送。你仍可使用普通关键词搜索；这里的文字不会自动保存为物品。"
+  },
+  "model_settings": "模型配置"
 }

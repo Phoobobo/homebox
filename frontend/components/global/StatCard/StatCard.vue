@@ -1,9 +1,9 @@
 <template>
-  <Card class="flex flex-col items-center bg-secondary p-3 text-secondary-foreground shadow">
+  <Card class="flex flex-row items-center justify-between gap-4 bg-transparent p-5">
     <CardHeader class="p-0">
       <CardTitle class="text-sm font-medium">{{ title }}</CardTitle>
     </CardHeader>
-    <CardContent class="p-0 text-2xl font-bold">
+    <CardContent class="p-0 text-3xl font-semibold tabular-nums text-primary">
       <Currency v-if="type === 'currency'" :amount="value" />
       <template v-if="type === 'number'">{{ value }}</template>
     </CardContent>

@@ -8,17 +8,8 @@
         }"
       >
         <h2 class="flex items-center justify-between gap-2">
-          <div class="relative size-6">
-            <div
-              class="absolute inset-0 flex items-center justify-center transition-transform duration-300 group-hover/location-card:-rotate-90"
-            >
-              <MdiMapMarkerOutline class="size-6 group-hover/location-card:hidden" />
-              <MdiArrowUp class="hidden size-6 group-hover/location-card:block" />
-            </div>
-          </div>
-          <span class="mx-auto">
-            {{ location.name }}
-          </span>
+          <MdiMapMarkerOutline class="size-5 shrink-0 text-primary" />
+          <span class="mr-auto font-medium">{{ location.name }}</span>
           <Badge :class="{ 'opacity-0': !hasCount }">
             {{ count }}
           </Badge>
@@ -30,7 +21,6 @@
 
 <script lang="ts" setup>
   import type { EntityOut, EntitySummary } from "~~/lib/api/types/data-contracts";
-  import MdiArrowUp from "~icons/mdi/arrow-down";
   import MdiMapMarkerOutline from "~icons/mdi/map-marker-outline";
   import { Card } from "@/components/ui/card";
   import { Badge } from "@/components/ui/badge";

@@ -1,5 +1,5 @@
 <template>
-  <Card class="relative overflow-hidden">
+  <Card class="relative overflow-hidden transition-colors hover:border-primary/40">
     <div v-if="tableRow" class="absolute left-1 top-1 z-10">
       <Checkbox
         class="size-5 bg-accent hover:bg-background-accent"
@@ -11,20 +11,16 @@
     <NuxtLink :to="`/item/${item.id}`">
       <div class="relative h-[200px]">
         <img
-          v-if="imageUrl && objectContain"
-          class="absolute h-[200px] w-full object-cover blur-md"
-          loading="lazy"
-          :src="imageUrl"
-          alt=""
-        />
-        <img
-          v-if="imageUrl"
-          class="absolute h-[200px] w-full shadow-md"
+          v-if="item.imageId"
+          class="absolute h-[200px] w-full bg-muted/30"
           :class="objectContain ? 'object-contain' : 'object-cover'"
           loading="lazy"
           :src="imageUrl"
           :alt="item.name"
         />
+        <div v-else class="flex h-full items-center justify-center bg-secondary/40 text-primary/40">
+          <MdiPackageVariant class="size-14" />
+        </div>
         <div class="absolute inset-x-1 bottom-1">
           <Badge class="text-wrap bg-secondary text-secondary-foreground hover:bg-secondary/70 hover:underline">
             <NuxtLink v-if="item.parent" :to="`/location/${item.parent.id}`">
@@ -33,11 +29,13 @@
           </Badge>
         </div>
       </div>
-      <div class="col-span-4 flex grow flex-col gap-y-1 p-4 pt-2">
-        <h2 class="line-clamp-2 text-ellipsis text-wrap text-lg font-bold">{{ item.name }}</h2>
-        <Separator class="mb-1" />
-        <Markdown class="mb-2 line-clamp-3 text-ellipsis" :source="item.description" />
-        <div class="-mr-1 mt-auto flex flex-wrap justify-end gap-2">
+      <div class="col-span-4 flex grow flex-col gap-y-2 p-4">
+        <h2 class="line-clamp-2 text-ellipsis text-wrap text-base font-semibold">
+          {{ item.name }}
+        </h2>
+
+        <Markdown class="mb-2 line-clamp-2 text-sm text-muted-foreground" :source="item.description" />
+        <div class="-mr-1 mt-auto flex flex-wrap justify-start gap-2">
           <TagChip v-for="tag in itemTags" :key="tag.id" :tag="tag" size="sm" :ancestors="tag.ancestors" />
         </div>
       </div>
@@ -46,10 +44,10 @@
 </template>
 
 <script setup lang="ts">
+  import MdiPackageVariant from "~icons/mdi/package-variant";
   import type { EntityOut, EntitySummary } from "~~/lib/api/types/data-contracts";
   import { Badge } from "@/components/ui/badge";
   import { Card } from "@/components/ui/card";
-  import { Separator } from "@/components/ui/separator";
   import Markdown from "@/components/global/Markdown.vue";
   import TagChip from "@/components/Tag/Chip.vue";
   import type { Row } from "@tanstack/vue-table";

@@ -12,7 +12,7 @@
     },
   });
 
-  const cmpClass = computed(() => cn("container mx-auto my-4 max-w-7xl px-4", props.class));
+  const cmpClass = computed(() => cn("container mx-auto my-6 max-w-7xl px-4 sm:px-6 lg:px-8", props.class));
 </script>
 
 <template>

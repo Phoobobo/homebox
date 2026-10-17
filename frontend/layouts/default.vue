@@ -16,22 +16,21 @@
     <CollectionInviteCreateModal />
     <SidebarProvider :default-open="sidebarState">
       <Sidebar collapsible="icon">
-        <SidebarHeader class="items-center">
-          <SidebarGroupLabel class="text-base group-data-[collapsible=icon]:hidden">{{
-            $t("global.welcome", { username: username })
-          }}</SidebarGroupLabel>
-          <NuxtLink class="group-data-[collapsible=icon]:hidden" to="/home">
-            <div class="flex size-24 items-center justify-center rounded-full bg-background-accent p-4">
-              <AppLogo />
-            </div>
+        <SidebarHeader class="gap-4 px-4 py-6">
+          <NuxtLink class="flex items-center gap-3 group-data-[collapsible=icon]:hidden" to="/home">
+            <AppLogo class="size-9 text-primary" />
+            <span class="text-xl font-semibold tracking-tight">{{ $t("app.name") }}</span>
           </NuxtLink>
+          <p class="text-xs text-muted-foreground group-data-[collapsible=icon]:hidden">
+            {{ $t("global.welcome", { username }) }}
+          </p>
 
           <CollectionSelector />
 
           <DropdownMenu>
             <DropdownMenuTrigger as-child>
               <SidebarMenuButton
-                class="flex justify-center bg-primary text-primary-foreground drop-shadow-md hover:bg-primary/90 active:bg-primary/90 active:text-primary-foreground group-data-[collapsible=icon]:justify-start"
+                class="flex justify-center bg-primary text-primary-foreground hover:bg-primary/90 active:bg-primary/90 active:text-primary-foreground group-data-[collapsible=icon]:justify-start"
                 :tooltip="$t('global.create')"
                 hotkey="Shortcut: Ctrl+`"
               >
@@ -179,13 +178,13 @@
           </div>
           <!-- IMPORTANT: if you change the height of this div, alter the top value in the item edit page-->
           <div
-            class="sticky top-0 z-20 flex h-[var(--header-height-mobile)] translate-y-[-0.5px] flex-col bg-secondary p-2 shadow-md sm:h-[var(--header-height)] sm:flex-row"
+            class="zainaer-header sticky top-0 z-20 flex h-[var(--header-height-mobile)] translate-y-[-0.5px] flex-col bg-background p-3 sm:h-[var(--header-height)] sm:flex-row"
             :class="{
               'lg:hidden': preferences.displayLegacyHeader,
             }"
           >
             <div class="flex h-1/2 items-center gap-2 sm:h-auto">
-              <SidebarTrigger variant="default" />
+              <SidebarTrigger variant="ghost" />
               <NuxtLink to="/home">
                 <AppHeaderText class="h-6" />
               </NuxtLink>
@@ -201,12 +200,12 @@
                 @keyup.enter="triggerSearch"
               />
               <div>
-                <Button size="icon" @click="triggerSearch">
+                <Button size="icon" :aria-label="$t('global.search')" @click="triggerSearch">
                   <MdiMagnify />
                 </Button>
               </div>
               <div>
-                <Button size="icon" @click="openScanner">
+                <Button variant="ghost" size="icon" :aria-label="$t('menu.scanner')" @click="openScanner">
                   <MdiQrcodeScan />
                 </Button>
               </div>
@@ -214,9 +213,47 @@
           </div>
 
           <slot />
+          <div
+            class="fixed bottom-6 right-5 z-30 flex flex-col items-end gap-3 sm:bottom-8 sm:right-8"
+            style="padding-bottom: env(safe-area-inset-bottom)"
+          >
+            <TextAssistant />
+            <DropdownMenu>
+              <DropdownMenuTrigger as-child>
+                <Button
+                  class="h-14 gap-2 rounded-full px-5 shadow-lg ring-4 ring-background"
+                  :aria-label="$t('global.create')"
+                  data-testid="floating-create-button"
+                >
+                  <MdiPlus class="size-6" />
+                  <span>{{ $t("global.create") }}</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end" side="top" :side-offset="12" class="w-52 p-2">
+                <DropdownMenuItem
+                  class="cursor-pointer gap-3 py-3"
+                  @click="openDialog(DialogID.CreateEntity, { params: { baseType: 'item' } })"
+                >
+                  <MdiPackageVariant class="size-5 text-primary" />
+                  {{ $t("menu.create_item") }}
+                </DropdownMenuItem>
+                <DropdownMenuItem
+                  class="cursor-pointer gap-3 py-3"
+                  @click="openDialog(DialogID.CreateEntity, { params: { baseType: 'location' } })"
+                >
+                  <MdiMapMarkerOutline class="size-5 text-primary" />
+                  {{ $t("menu.create_location") }}
+                </DropdownMenuItem>
+                <DropdownMenuItem class="cursor-pointer gap-3 py-3" @click="openDialog(DialogID.CreateTag)">
+                  <MdiTagMultiple class="size-5 text-primary" />
+                  {{ $t("menu.create_tag") }}
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
           <div class="grow" />
 
-          <footer v-if="status" class="bottom-0 w-full pb-4 text-center">
+          <footer v-if="status" class="zainaer-footer bottom-0 w-full pb-4 text-center">
             <p class="text-center text-sm">
               {{ $t("global.version", { version: status.build.version }) }} ·
               {{ $t("global.build", { build: status.build.commit.slice(0, 7) }) }}
@@ -229,6 +266,7 @@
 </template>
 
 <script lang="ts" setup>
+  import TextAssistant from "~/components/App/TextAssistant.vue";
   import { useI18n } from "vue-i18n";
   import LanguageQuickSwitch from "~/components/App/LanguageQuickSwitch.vue";
   import { useTagStore } from "~/stores/tags";
@@ -242,6 +280,8 @@
   import MdiQrcodeScan from "~icons/mdi/qrcode-scan";
   import MdiAccount from "~icons/mdi/account";
   import MdiCog from "~icons/mdi/cog";
+  import MdiPackageVariant from "~icons/mdi/package-variant";
+  import MdiMapMarkerOutline from "~icons/mdi/map-marker-outline";
   import MdiPlus from "~icons/mdi/plus";
   import MdiLogout from "~icons/mdi/logout";
   import MdiChevronRight from "~icons/mdi/chevron-right";
@@ -251,7 +291,6 @@
     SidebarContent,
     SidebarFooter,
     SidebarGroup,
-    SidebarGroupLabel,
     SidebarHeader,
     SidebarInset,
     SidebarMenu,
@@ -340,9 +379,6 @@
       toast.error(t("scanner.unsupported"));
     }
   };
-
-  // Preload currency format
-  useFormatCurrency();
 
   type DropdownItem = {
     id: number;
@@ -447,6 +483,12 @@
           active: computed(() => route.path === "/collection/settings"),
           name: computed(() => t("collection.tabs.settings")),
           to: "/collection/settings",
+        },
+        {
+          id: 67,
+          active: computed(() => route.path === "/collection/models"),
+          name: computed(() => t("model_settings")),
+          to: "/collection/models",
         },
         {
           id: 66,

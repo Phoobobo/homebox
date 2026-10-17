@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 @layer base {
-  :root,.homebox {
+  :root,
+  .homebox {
     --background: 0 0% 100%;
     --background-accent: 0 0% 81%;
     --foreground: 0 0% 20%;
@@ -34,7 +35,7 @@
     --sidebar-ring: 0 0% 81%;
 
     --radius: 0.5rem;
-}
+  }
 
   /*
   * The below themes are based on the daisyUI themes which are licensed under the MIT License.
@@ -50,7 +51,6 @@
   * The license can be found here https://github.com/n0acar/tiny-projects
   */
 
-  
   .theme-aqua {
     --background: 219 53% 43%;
     --background-accent: 219 53% 35%;
@@ -212,36 +212,35 @@
     --radius: 0.125rem;
   }
   .theme-cupcake {
-    --background: 24 33% 97%;
-    --background-accent: 22 14% 89%;
-    --foreground: 280 46% 14%;
-    --primary: 183 47% 59%;
-    --primary-foreground: 183 100% 12%;
-    --secondary: 280 46% 14%;
-    --secondary-foreground: 280 82% 83%;
-    --accent: 338 71% 78%;
-    --accent-foreground: 338 100% 16%;
-    --muted: 27 22% 92%;
-    --muted-foreground: 280 46% 14%;
-    --card: 24 33% 97%;
-    --card-foreground: 280 46% 14%;
-    --popover: 24 33% 97%;
-    --popover-foreground: 280 46% 14%;
-    --destructive: 0 91% 71%;
-    --destructive-foreground: 0 100% 14%;
-    --input: 22 14% 89%;
-    --border: 22 14% 89%;
-    --ring: 183 47% 59%;
-    --sidebar-background: 27 22% 92%;
-    --sidebar-foreground: 280 46% 14%;
-    --sidebar-primary: 183 47% 59%;
-    --sidebar-primary-foreground: 183 100% 12%;
-    --sidebar-accent: 22 14% 89%;
-    --sidebar-accent-foreground: 280 46% 14%;
-    --sidebar-border: 22 14% 89%;
-    --sidebar-ring: 22 14% 89%;
-
-    --radius: 1.9rem;
+    --background: 180 20% 98%;
+    --background-accent: 180 18% 96%;
+    --foreground: 195 24% 19%;
+    --primary: 176 42% 32%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 175 25% 91%;
+    --secondary-foreground: 195 24% 19%;
+    --accent: 338 52% 93%;
+    --accent-foreground: 338 30% 32%;
+    --muted: 180 15% 94%;
+    --muted-foreground: 195 10% 43%;
+    --card: 0 0% 100%;
+    --card-foreground: 195 24% 19%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 195 24% 19%;
+    --destructive: 0 65% 45%;
+    --destructive-foreground: 0 0% 100%;
+    --input: 180 13% 85%;
+    --border: 180 13% 89%;
+    --ring: 176 42% 32%;
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 195 24% 19%;
+    --sidebar-primary: 176 42% 32%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 175 25% 94%;
+    --sidebar-accent-foreground: 176 42% 27%;
+    --sidebar-border: 180 13% 89%;
+    --sidebar-ring: 176 42% 32%;
+    --radius: 0.75rem;
   }
   .theme-cyberpunk {
     --background: 56 100% 50%;
@@ -275,7 +274,15 @@
 
     --radius: 0;
 
-    font-family: ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;
+    font-family:
+      ui-monospace,
+      SFMono-Regular,
+      Menlo,
+      Monaco,
+      Consolas,
+      Liberation Mono,
+      Courier New,
+      monospace;
   }
   .theme-dracula {
     --background: 231 15% 18%;
@@ -725,7 +732,10 @@
 
     --radius: 0.2rem;
 
-    font-family: Chalkboard,comic sans ms, sanssecondaryerif;
+    font-family:
+      Chalkboard,
+      comic sans ms,
+      sanssecondaryerif;
   }
   .theme-autumn {
     --background: 0 0% 95%;
@@ -957,7 +967,8 @@
   * {
     @apply border-border;
   }
-  html, body {
+  html,
+  body {
     @apply bg-background text-foreground;
     width: 100%;
     overflow-x: hidden;
@@ -965,26 +976,26 @@
 }
 
 .text-no-transform {
-    text-transform: none !important;
+  text-transform: none !important;
 }
 
 /* transparent subtle scrollbar */
 ::-webkit-scrollbar {
   width: 0.2em;
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: rgba(0,0,0,.2);
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 ::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-  background-color: #F5F5F5;
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #f5f5f5;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #9B9B9B;
+  background-color: #9b9b9b;
 }
 
 .scroll-bg::-webkit-scrollbar {
@@ -1076,4 +1087,105 @@ h6 {
   overflow-wrap: anywhere;
   word-break: normal;
   hyphens: auto;
+}
+/* Quiet, legible surfaces for a household directory. */
+body {
+  font-family: "Avenir Next", "PingFang SC", "Microsoft YaHei", sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+h1,
+h2,
+h3 {
+  letter-spacing: -0.025em;
+}
+[data-sidebar="sidebar"] {
+  border-right: 1px solid hsl(var(--border));
+}
+[data-sidebar="menu-button"] {
+  font-size: 0.9375rem;
+  height: 2.65rem;
+}
+[data-sidebar="menu-button"] > svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+[data-sidebar="menu-badge"] [data-sidebar="menu-button"] {
+  font-size: 0.875rem;
+  height: 2.1rem;
+}
+.zainaer-header {
+  border-bottom: 1px solid hsl(var(--border));
+}
+.zainaer-header input {
+  background: hsl(var(--muted) / 0.6);
+  border-color: transparent;
+}
+.zainaer-header input:focus {
+  border-color: hsl(var(--primary));
+}
+.zainaer-footer {
+  color: hsl(var(--muted-foreground));
+  padding-top: 2rem;
+}
+.household-detail {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: 2.5rem;
+  padding: 1.75rem;
+}
+.household-photos {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: start;
+  gap: 0.75rem;
+}
+.household-photos button {
+  overflow: hidden;
+  border-radius: 0.5rem;
+  background: hsl(var(--muted));
+}
+.household-photos button:first-child {
+  width: 100%;
+}
+.household-photos img {
+  width: 100%;
+  max-height: 460px;
+  object-fit: contain;
+}
+.household-photos button:not(:first-child) {
+  width: 100px;
+}
+.household-fields > div + div {
+  margin-top: 1.75rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid hsl(var(--border));
+}
+.household-fields dt {
+  font-size: 0.8125rem;
+  color: hsl(var(--muted-foreground));
+  margin-bottom: 0.75rem;
+}
+.household-empty-photo {
+  display: grid;
+  place-content: center;
+  min-height: 260px;
+  width: 100%;
+  border: 1px dashed hsl(var(--border));
+  border-radius: 0.5rem;
+  color: hsl(var(--muted-foreground));
+}
+@media (max-width: 767px) {
+  .household-detail {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 1.25rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
 }

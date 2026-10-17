@@ -81,8 +81,6 @@ func (a *app) mountRoutes(r *chi.Mux, chain *errchain.ErrChain, repos *repo.AllR
 			BuildTime: buildTime,
 		})))
 
-		r.Get("/currencies", chain.ToHandlerFunc(v1Ctrl.HandleCurrency()))
-
 		providers := []v1.AuthProvider{
 			providers.NewLocalProvider(a.services.User),
 		}
@@ -109,6 +107,12 @@ func (a *app) mountRoutes(r *chi.Mux, chain *errchain.ErrChain, repos *repo.AllR
 		r.Get("/users/self", chain.ToHandlerFunc(v1Ctrl.HandleUserSelf(), userMW...))
 		r.Put("/users/self", chain.ToHandlerFunc(v1Ctrl.HandleUserSelfUpdate(), userMW...))
 		r.Delete("/users/self", chain.ToHandlerFunc(v1Ctrl.HandleUserSelfDelete(), userMW...))
+		r.Get("/ai/status", chain.ToHandlerFunc(v1Ctrl.HandleAIStatus(), userMW...))
+		r.Post("/ai/chat", chain.ToHandlerFunc(v1Ctrl.HandleAIChat(), append(append([]errchain.Middleware{}, userMW...), a.mwAuthRateLimit)...))
+		r.Post("/ai/confirm", chain.ToHandlerFunc(v1Ctrl.HandleAIConfirm(), userMW...))
+		r.Get("/ai/settings", chain.ToHandlerFunc(v1Ctrl.HandleAISettings(), userMW...))
+		r.Put("/ai/settings", chain.ToHandlerFunc(v1Ctrl.HandleAISettings(), userMW...))
+		r.Post("/ai/test", chain.ToHandlerFunc(v1Ctrl.HandleAITest(), append(append([]errchain.Middleware{}, userMW...), a.mwAuthRateLimit)...))
 		r.Get("/users/self/settings", chain.ToHandlerFunc(v1Ctrl.HandleUserSelfSettingsGet(), userMW...))
 		r.Put("/users/self/settings", chain.ToHandlerFunc(v1Ctrl.HandleUserSelfSettingsUpdate(), userMW...))
 		r.Post("/users/logout", chain.ToHandlerFunc(v1Ctrl.HandleAuthLogout(), userMW...))

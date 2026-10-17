@@ -215,33 +215,21 @@
 </script>
 
 <template>
-  <div class="relative flex min-h-screen flex-col">
-    <div class="pointer-events-none absolute top-0 z-0 min-w-full fill-primary">
-      <div class="flex min-h-[20vh] flex-col bg-primary" />
-      <svg
-        class="fill-primary drop-shadow-xl"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 1440 320"
-        preserveAspectRatio="none"
-      >
-        <path
-          fill-opacity="1"
-          d="M0,32L80,69.3C160,107,320,181,480,181.3C640,181,800,107,960,117.3C1120,128,1280,224,1360,272L1440,320L1440,0L1360,0C1280,0,1120,0,960,0C800,0,640,0,480,0C320,0,160,0,80,0L0,0Z"
-        />
-      </svg>
-    </div>
+  <div class="zainaer-login relative flex min-h-screen flex-col">
     <div class="relative z-10">
       <header
-        class="mx-auto p-4 sm:flex sm:items-end sm:p-6 lg:p-14"
+        class="login-header mx-auto p-6 sm:flex sm:items-center lg:p-10"
         :class="{
           'text-accent': !isEvilAccentTheme,
           'text-white': isLofiTheme,
         }"
       >
         <div class="z-10">
-          <h2 class="mt-1 flex text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl">{{ $t("app.name") }}</h2>
+          <h2 class="mt-1 flex text-3xl font-semibold tracking-tight text-primary sm:text-4xl">
+            {{ $t("app.name") }}
+          </h2>
           <p
-            class="ml-1 text-lg"
+            class="mt-3 max-w-md text-sm leading-relaxed text-muted-foreground"
             :class="{
               'text-foreground': !isEvilForegroundTheme,
               'text-white': isLofiTheme,
@@ -443,5 +431,22 @@
 
   progress[value]::-webkit-progress-value {
     transition: width 0.5s;
+  }
+</style>
+
+<style scoped>
+  .login-header {
+    max-width: 1120px;
+  }
+  .zainaer-login :deep(form > div) {
+    border-radius: 1rem;
+    box-shadow: 0 12px 40px hsl(var(--foreground) / 0.04);
+  }
+  .zainaer-login :deep(form input) {
+    border-radius: 0.5rem;
+    background: hsl(var(--background));
+  }
+  .zainaer-login :deep(form button[type="submit"]) {
+    height: 2.75rem;
   }
 </style>

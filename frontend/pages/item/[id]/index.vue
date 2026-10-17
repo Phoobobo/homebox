@@ -614,7 +614,11 @@
       return;
     }
 
-    toast.success(t("components.template.toast.saved_as_template", { name: templateData.name }));
+    toast.success(
+      t("components.template.toast.saved_as_template", {
+        name: templateData.name,
+      })
+    );
     navigateTo(`/template/${data.id}`);
   }
 
@@ -654,7 +658,7 @@
     </Dialog>
 
     <section>
-      <Card class="p-3">
+      <Card class="p-5 sm:p-6">
         <header :class="{ 'mb-2': item.description }">
           <div class="flex flex-wrap items-end gap-2">
             <div
@@ -682,13 +686,13 @@
                   </BreadcrumbItem>
                 </BreadcrumbList>
               </Breadcrumb>
-              <h1 class="text-wrap pb-1 text-2xl">
+              <h1 class="text-wrap pb-2 text-3xl font-semibold">
                 {{ item ? item.name : "" }}
               </h1>
               <div class="flex flex-wrap gap-2 pb-1">
                 <TagChip v-for="tag in itemTags" :key="tag.id" :tag="tag" size="sm" :ancestors="tag.ancestors" />
               </div>
-              <div class="flex flex-wrap gap-1 text-wrap text-xs">
+              <div class="flex flex-wrap gap-1 text-wrap text-xs text-muted-foreground">
                 <div>
                   {{ $t("items.created_at") }}
                   <DateTime :date="item?.createdAt" />
@@ -772,41 +776,54 @@
         <NuxtPage :item="item" :page-key="itemId" />
 
         <BaseCard v-if="householdItemMode && !hasNested">
-          <template #title>{{ $t("items.details") }}</template>
-          <dl class="space-y-5 p-5">
-            <div>
-              <dt class="mb-2 font-medium">{{ $t("items.name") }}</dt>
-              <dd>{{ item.name }}</dd>
+          <div class="household-detail">
+            <div class="household-photos">
+              <button
+                v-for="(img, i) in photos"
+                :key="i"
+                :aria-label="$t('items.photos')"
+                @click="openImageDialog(img, item.id)"
+              >
+                <img :src="img.thumbnailSrc" :alt="item.name" />
+              </button>
+              <div v-if="!photos?.length" class="household-empty-photo">
+                {{ $t("household.no_photos") }}
+              </div>
             </div>
-            <div>
-              <dt class="mb-2 font-medium">{{ $t("global.tags") }}</dt>
-              <dd class="flex flex-wrap gap-2">
-                <TagChip v-for="tag in itemTags" :key="tag.id" :tag="tag" size="sm" :ancestors="tag.ancestors" />
-                <span v-if="!itemTags.length" class="text-foreground/60">{{ $t("household.no_tags") }}</span>
-              </dd>
-            </div>
-            <div>
-              <dt class="mb-2 font-medium">{{ $t("items.photos") }}</dt>
-              <dd class="flex flex-wrap gap-3">
-                <button
-                  v-for="(img, i) in photos"
-                  :key="i"
-                  :aria-label="$t('items.photos')"
-                  @click="openImageDialog(img, item.id)"
-                >
-                  <img class="max-h-[240px] rounded" :src="img.thumbnailSrc" :alt="item.name" />
-                </button>
-                <span v-if="!photos?.length" class="text-foreground/60">{{ $t("household.no_photos") }}</span>
-              </dd>
-            </div>
-            <div>
-              <dt class="mb-2 font-medium">{{ $t("items.description") }}</dt>
-              <dd>
-                <Markdown v-if="item.description" class="prose max-w-full" :source="item.description" />
-                <span v-else class="text-foreground/60">{{ $t("household.no_description") }}</span>
-              </dd>
-            </div>
-          </dl>
+            <dl class="household-fields">
+              <div>
+                <dt>{{ $t("home.storage_locations") }}</dt>
+                <dd class="flex flex-wrap items-center gap-2 font-medium">
+                  <template v-for="(part, idx) in fullpath?.slice(0, -1)" :key="part.id">
+                    <span v-if="idx" class="text-muted-foreground">/</span>
+                    <NuxtLink class="text-primary hover:underline" :to="`/${part.type}/${part.id}`">{{
+                      part.name
+                    }}</NuxtLink>
+                  </template>
+                </dd>
+              </div>
+              <div>
+                <dt>{{ $t("global.tags") }}</dt>
+                <dd class="flex flex-wrap gap-2">
+                  <TagChip v-for="tag in itemTags" :key="tag.id" :tag="tag" size="sm" :ancestors="tag.ancestors" />
+                  <span v-if="!itemTags.length" class="text-sm text-muted-foreground">{{
+                    $t("household.no_tags")
+                  }}</span>
+                </dd>
+              </div>
+              <div>
+                <dt>{{ $t("items.description") }}</dt>
+                <dd>
+                  <Markdown
+                    v-if="item.description"
+                    class="prose max-w-full text-sm leading-relaxed"
+                    :source="item.description"
+                  />
+                  <span v-else class="text-sm text-muted-foreground">{{ $t("household.no_description") }}</span>
+                </dd>
+              </div>
+            </dl>
+          </div>
         </BaseCard>
 
         <!-- anything in this is not rendered if on another page -->
@@ -889,7 +906,9 @@
               </template>
             </DetailsSection>
             <div v-else>
-              <p class="px-6 pb-4 text-foreground/70">{{ $t("items.no_attachments") }}</p>
+              <p class="px-6 pb-4 text-foreground/70">
+                {{ $t("items.no_attachments") }}
+              </p>
             </div>
           </BaseCard>
 

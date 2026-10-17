@@ -13,7 +13,7 @@
 </script>
 
 <template>
-  <div class="flex shrink-0 items-center gap-1" role="group" :aria-label="t('profile.language')">
+  <div class="flex shrink-0 items-center gap-1 text-foreground" role="group" :aria-label="t('profile.language')">
     <Button
       type="button"
       size="sm"

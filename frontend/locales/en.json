@@ -1034,5 +1034,20 @@
         "no_tags": "No tags yet",
         "no_photos": "No photos yet",
         "no_description": "No description yet"
-    }
+    },
+  "assistant": {
+    "title": "Text assistant",
+    "subtitle": "Describe what you want to find or where something belongs.",
+    "disconnected": "AI model not connected",
+    "greeting": "What would you like to find or remember?",
+    "explanation": "Start a draft below. Once a model is connected, you can find items in natural language and prepare new item records.",
+    "example_find": "Where are my car keys?",
+    "example_add": "Put the charger in the second drawer on the left in the study, tagged electronics.",
+    "input": "Message",
+    "placeholder": "For example: Find my red document case…",
+    "keyword_search": "Keyword search",
+    "send": "Send",
+    "not_ready": "AI chat is not connected, so sending is unavailable. Keyword search still works. This text will not automatically create an item."
+  },
+  "model_settings": "Model settings"
 }

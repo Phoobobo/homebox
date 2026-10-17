@@ -48,6 +48,12 @@
       icon: MdiCog,
     },
     {
+      id: "models",
+      label: "model_settings",
+      to: "/collection/models",
+      icon: MdiCog,
+    },
+    {
       id: "tools",
       label: "collection.tabs.tools",
       to: "/collection/tools",

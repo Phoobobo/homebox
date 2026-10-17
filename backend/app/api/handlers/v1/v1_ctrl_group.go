@@ -68,12 +68,12 @@ func (ctrl *V1Controller) HandleGroupUpdate() errchain.HandlerFunc {
 	fn := func(r *http.Request, body repo.GroupUpdate) (repo.Group, error) {
 		auth := services.NewContext(r.Context())
 
-		ok := ctrl.svc.Currencies.IsSupported(body.Currency)
-		if !ok {
-			return repo.Group{}, validate.NewFieldErrors(
-				validate.NewFieldError("currency", "currency '"+body.Currency+"' is not supported"),
-			)
+		// Currency is retained for legacy data, but no longer user-configurable.
+		current, err := ctrl.repo.Groups.GroupByID(auth, auth.GID)
+		if err != nil {
+			return repo.Group{}, err
 		}
+		body.Currency = current.Currency
 
 		return ctrl.svc.Group.UpdateGroup(auth, body)
 	}
