@@ -7,8 +7,8 @@
       :src="imageUrl"
       :alt="item.name"
     />
-    <div v-else class="absolute inset-0 flex items-center justify-center bg-secondary/40 pb-24 text-primary/40">
-      <MdiPackageVariant class="size-14" />
+    <div v-else class="absolute inset-0 flex items-center justify-center bg-secondary text-primary/25">
+      <MdiPackageVariant class="size-full p-8" />
     </div>
 
     <NuxtLink

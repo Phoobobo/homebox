@@ -74,7 +74,7 @@
     navigateTo("/locations");
   }
 
-  function openCreateItem() {
+  function openCreate() {
     openDialog(DialogID.CreateEntity, {
       params: {
         baseType: "item",
@@ -275,10 +275,10 @@
               </div>
             </div>
             <div class="ml-auto mt-2 flex flex-wrap items-center justify-between gap-2">
-              <Button class="w-9 md:w-auto" @click="openCreateItem">
+              <Button class="w-9 md:w-auto" @click="openCreate">
                 <MdiPlus name="mdi-plus" />
                 <span class="hidden md:inline">
-                  {{ $t("components.location.create_item") }}
+                  {{ $t("global.add") }}
                 </span>
               </Button>
               <Button class="w-9 md:w-auto" @click="goToEdit">

@@ -2,8 +2,27 @@
   <BaseModal :dialog-id="DialogID.CreateEntity">
     <template #title>
       <div class="flex items-center gap-2 text-nowrap">
-        <span>{{ $t("global.create") }}</span>
+        <span>{{ $t("global.add") }}</span>
+        <div
+          v-if="householdItemMode"
+          class="flex gap-1"
+          role="group"
+          :aria-label="$t('components.entity.selector.placeholder')"
+        >
+          <Button
+            v-for="type in subItemCreate ? entityTypes.filter(t => !t.isLocation) : entityTypes"
+            :key="type.id"
+            type="button"
+            size="sm"
+            :variant="selectedEntityType?.id === type.id ? 'default' : 'outline'"
+            :aria-pressed="selectedEntityType?.id === type.id"
+            @click="onEntityTypeChanged(type.id)"
+          >
+            {{ type.isLocation ? $t("global.location") : $t("global.item") }}
+          </Button>
+        </div>
         <EntitySelector
+          v-else
           :selected-entity-type="selectedEntityType?.id"
           :entity-types="subItemCreate ? entityTypes.filter(t => !t.isLocation) : entityTypes"
           size="sm"

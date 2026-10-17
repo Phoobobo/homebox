@@ -184,7 +184,10 @@
 <template>
   <Sheet v-model:open="open">
     <SheetTrigger as-child>
-      <Button variant="outline" class="h-12 gap-2 rounded-full px-5 shadow-sm" data-testid="text-assistant-button"
+      <Button
+        variant="outline"
+        class="h-12 w-32 justify-center gap-2 rounded-full px-4 shadow-sm"
+        data-testid="text-assistant-button"
         ><MessageCircle class="size-5" />{{ t("assistant.title") }}</Button
       >
     </SheetTrigger>

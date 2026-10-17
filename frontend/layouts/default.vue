@@ -25,53 +25,6 @@
           </p>
 
           <CollectionSelector />
-
-          <DropdownMenu>
-            <DropdownMenuTrigger as-child>
-              <SidebarMenuButton
-                class="flex justify-center bg-primary text-primary-foreground hover:bg-primary/90 active:bg-primary/90 active:text-primary-foreground group-data-[collapsible=icon]:justify-start"
-                :tooltip="$t('global.create')"
-                hotkey="Shortcut: Ctrl+`"
-              >
-                <MdiPlus />
-                <span>
-                  {{ $t("global.create") }}
-                </span>
-              </SidebarMenuButton>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent class="z-40 min-w-[var(--reka-dropdown-menu-trigger-width)]">
-              <DropdownMenuItem
-                v-for="btn in dropdown"
-                :key="btn.id"
-                class="group cursor-pointer text-lg"
-                @click="
-                  () => {
-                    if (btn.dialogId === DialogID.CreateEntity) {
-                      if (btn.id == 0)
-                        // create item
-                        openDialog(btn.dialogId, {
-                          params: { baseType: 'item' },
-                        });
-                      else if (btn.id == 1)
-                        // create location
-                        openDialog(btn.dialogId, {
-                          params: { baseType: 'location' },
-                        });
-                    } else {
-                      openDialog(btn.dialogId as NoParamDialogIDs);
-                    }
-                  }
-                "
-              >
-                {{ btn.name.value }}
-                <Shortcut
-                  v-if="btn.shortcut"
-                  class="invisible ml-auto group-hover:visible"
-                  :keys="btn.shortcut.replace('Shift', '⇧').split('+')"
-                />
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
         </SidebarHeader>
 
         <SidebarContent>
@@ -201,12 +154,13 @@
             <DropdownMenu>
               <DropdownMenuTrigger as-child>
                 <Button
-                  class="h-14 gap-2 rounded-full px-5 shadow-lg ring-4 ring-background"
-                  :aria-label="$t('global.create')"
+                  variant="outline"
+                  class="h-12 w-32 justify-center gap-2 rounded-full px-4 shadow-sm"
+                  :aria-label="$t('global.add')"
                   data-testid="floating-create-button"
                 >
-                  <MdiPlus class="size-6" />
-                  <span>{{ $t("global.create") }}</span>
+                  <MdiPlus class="size-5" />
+                  <span>{{ $t("global.add") }}</span>
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end" side="top" :side-offset="12" class="w-52 p-2">
@@ -289,11 +243,10 @@
     DropdownMenuTrigger,
   } from "@/components/ui/dropdown-menu";
   import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-  import { Shortcut } from "~/components/ui/shortcut";
   import { useDialog } from "~/components/ui/dialog-provider";
   import { Input } from "~/components/ui/input";
   import { Button } from "~/components/ui/button";
-  import { DialogID, type NoParamDialogIDs } from "~/components/ui/dialog-provider/utils";
+  import { DialogID } from "~/components/ui/dialog-provider/utils";
   import ModalConfirm from "~/components/ModalConfirm.vue";
   import OutdatedModal from "~/components/App/OutdatedModal.vue";
   import EntityCreateModal from "~/components/Entity/CreateModal.vue";
