@@ -39,7 +39,6 @@
   import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
   import TagChip from "~/components/Tag/Chip.vue";
   import DateTime from "~/components/global/DateTime.vue";
-  import LabelMaker from "~/components/global/LabelMaker.vue";
   import Markdown from "~/components/global/Markdown.vue";
   import BaseCard from "@/components/Base/Card.vue";
   import CopyText from "@/components/global/CopyText.vue";
@@ -705,12 +704,6 @@
               </div>
             </div>
             <div class="ml-auto mt-2 flex flex-wrap items-center justify-between gap-2">
-              <LabelMaker
-                v-if="!householdItemMode && typeof item.assetId === 'string' && item.assetId != ''"
-                :id="item.assetId"
-                type="asset"
-              />
-              <LabelMaker v-else-if="!householdItemMode" :id="item.id" type="item" />
               <Button
                 v-if="!householdItemMode"
                 class="w-9 md:w-auto"

@@ -19,7 +19,6 @@
   import BaseContainer from "@/components/Base/Container.vue";
   import Currency from "~/components/global/Currency.vue";
   import DateTime from "~/components/global/DateTime.vue";
-  import PageQRCode from "~/components/global/PageQRCode.vue";
   import Markdown from "~/components/global/Markdown.vue";
   import ItemViewSelectable from "~/components/Item/View/Selectable.vue";
   import TagSingleSelector from "~/components/Tag/SingleSelector.vue";
@@ -297,7 +296,6 @@
             </div>
           </div>
           <div class="ml-auto mt-2 flex flex-wrap items-center justify-between gap-3">
-            <PageQRCode />
             <Button @click="openUpdate">
               <MdiPencil />
               {{ $t("global.edit") }}

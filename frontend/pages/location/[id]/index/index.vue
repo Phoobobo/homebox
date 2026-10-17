@@ -22,7 +22,6 @@
   import { DialogID } from "~/components/ui/dialog-provider/utils";
   import BaseCard from "@/components/Base/Card.vue";
   import DateTime from "~/components/global/DateTime.vue";
-  import LabelMaker from "~/components/global/LabelMaker.vue";
   import Markdown from "~/components/global/Markdown.vue";
   import DetailsSection from "~/components/global/DetailsSection/DetailsSection.vue";
   import BaseSectionHeader from "@/components/Base/SectionHeader.vue";
@@ -276,7 +275,6 @@
               </div>
             </div>
             <div class="ml-auto mt-2 flex flex-wrap items-center justify-between gap-2">
-              <LabelMaker :id="location.id" type="location" />
               <Button class="w-9 md:w-auto" @click="openCreateItem">
                 <MdiPlus name="mdi-plus" />
                 <span class="hidden md:inline">

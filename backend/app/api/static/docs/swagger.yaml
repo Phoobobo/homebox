@@ -2146,8 +2146,6 @@ definitions:
         type: boolean
       health:
         type: boolean
-      labelPrinting:
-        type: boolean
       latest:
         $ref: '#/definitions/services.Latest'
       message:
@@ -3421,78 +3419,6 @@ paths:
       summary: Get Tags Statistics
       tags:
       - Statistics
-  /v1/labelmaker/asset/{id}:
-    get:
-      parameters:
-      - description: Asset ID
-        in: path
-        name: id
-        required: true
-        type: string
-      - description: Print this label, defaults to false
-        in: query
-        name: print
-        type: boolean
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: image/png
-          schema:
-            type: string
-      security:
-      - Bearer: []
-      summary: Get Asset label
-      tags:
-      - Items
-  /v1/labelmaker/item/{id}:
-    get:
-      parameters:
-      - description: Item ID
-        in: path
-        name: id
-        required: true
-        type: string
-      - description: Print this label, defaults to false
-        in: query
-        name: print
-        type: boolean
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: image/png
-          schema:
-            type: string
-      security:
-      - Bearer: []
-      summary: Get Item label
-      tags:
-      - Items
-  /v1/labelmaker/location/{id}:
-    get:
-      parameters:
-      - description: Location ID
-        in: path
-        name: id
-        required: true
-        type: string
-      - description: Print this label, defaults to false
-        in: query
-        name: print
-        type: boolean
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: image/png
-          schema:
-            type: string
-      security:
-      - Bearer: []
-      summary: Get Location label
-      tags:
-      - Locations
   /v1/maintenance:
     get:
       parameters:
@@ -3676,25 +3602,6 @@ paths:
       security:
       - Bearer: []
       summary: Search EAN from Barcode
-      tags:
-      - Items
-  /v1/qrcode:
-    get:
-      parameters:
-      - description: data to be encoded into qrcode
-        in: query
-        name: data
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: image/jpeg
-          schema:
-            type: string
-      security:
-      - Bearer: []
-      summary: Create QR Code
       tags:
       - Items
   /v1/reporting/bill-of-materials:

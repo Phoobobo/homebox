@@ -203,17 +203,10 @@ func (a *app) mountRoutes(r *chi.Mux, chain *errchain.ErrChain, repos *repo.AllR
 			a.mwRoles(RoleModeOr, authroles.RoleUser.String(), authroles.RoleAttachments.String()),
 		}
 
-		r.Get("/qrcode", chain.ToHandlerFunc(v1Ctrl.HandleGenerateQRCode(), assetMW...))
 		r.Get(
 			"/entities/{id}/attachments/{attachment_id}",
 			chain.ToHandlerFunc(v1Ctrl.HandleEntityAttachmentGet(), assetMW...),
 		)
-
-		// Labelmaker
-		r.Get("/labelmaker/entity/{id}", chain.ToHandlerFunc(v1Ctrl.HandleGetItemLabel(), userMW...))
-		r.Get("/labelmaker/location/{id}", chain.ToHandlerFunc(v1Ctrl.HandleGetLocationLabel(), userMW...))
-		r.Get("/labelmaker/item/{id}", chain.ToHandlerFunc(v1Ctrl.HandleGetItemLabel(), userMW...))
-		r.Get("/labelmaker/asset/{id}", chain.ToHandlerFunc(v1Ctrl.HandleGetAssetLabel(), userMW...))
 
 		// OpenTelemetry proxy endpoint for frontend telemetry (requires auth)
 		if a.otel != nil && a.otel.IsEnabled() && a.conf.Otel.ProxyEnabled {

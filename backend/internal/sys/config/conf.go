@@ -46,22 +46,22 @@ const (
 
 type Config struct {
 	conf.Version
-	Mode       string         `yaml:"mode"       conf:"default:development"` // development or production
-	Web        WebConfig      `yaml:"web"`
-	Storage    Storage        `yaml:"storage"`
-	Database   Database       `yaml:"database"`
-	Log        LoggerConf     `yaml:"logger"`
-	Mailer     MailerConf     `yaml:"mailer"`
-	Demo       bool           `yaml:"demo"`
-	Debug      DebugConf      `yaml:"debug"`
-	Options    Options        `yaml:"options"`
-	OIDC       OIDCConf       `yaml:"oidc"`
-	LabelMaker LabelMakerConf `yaml:"labelmaker"`
-	Thumbnail  Thumbnail      `yaml:"thumbnail"`
-	Barcode    BarcodeAPIConf `yaml:"barcode"`
-	Otel       OTelConfig     `yaml:"otel"`
-	Auth       AuthConfig     `yaml:"auth"`
-	Notifier   NotifierConf   `yaml:"notifier"`
+	Mode     string     `yaml:"mode"       conf:"default:development"` // development or production
+	Web      WebConfig  `yaml:"web"`
+	Storage  Storage    `yaml:"storage"`
+	Database Database   `yaml:"database"`
+	Log      LoggerConf `yaml:"logger"`
+	Mailer   MailerConf `yaml:"mailer"`
+	Demo     bool       `yaml:"demo"`
+	Debug    DebugConf  `yaml:"debug"`
+	Options  Options    `yaml:"options"`
+	OIDC     OIDCConf   `yaml:"oidc"`
+
+	Thumbnail Thumbnail      `yaml:"thumbnail"`
+	Barcode   BarcodeAPIConf `yaml:"barcode"`
+	Otel      OTelConfig     `yaml:"otel"`
+	Auth      AuthConfig     `yaml:"auth"`
+	Notifier  NotifierConf   `yaml:"notifier"`
 }
 
 type Options struct {
@@ -100,21 +100,6 @@ type WebConfig struct {
 	ReadTimeout   time.Duration `yaml:"read_timeout"      conf:"default:10s"`
 	WriteTimeout  time.Duration `yaml:"write_timeout"     conf:"default:10s"`
 	IdleTimeout   time.Duration `yaml:"idle_timeout"      conf:"default:30s"`
-}
-
-type LabelMakerConf struct {
-	Width                 int64          `yaml:"width"                 conf:"default:526"`
-	Height                int64          `yaml:"height"                conf:"default:200"`
-	Padding               int64          `yaml:"padding"               conf:"default:32"`
-	Margin                int64          `yaml:"margin"                conf:"default:32"`
-	FontSize              float64        `yaml:"font_size"             conf:"default:32.0"`
-	PrintCommand          *string        `yaml:"string"`
-	AdditionalInformation *string        `yaml:"string"`
-	DynamicLength         bool           `yaml:"bool"                  conf:"default:true"`
-	LabelServiceUrl       *string        `yaml:"label_service_url"`
-	LabelServiceTimeout   *time.Duration `yaml:"label_service_timeout"`
-	RegularFontPath       *string        `yaml:"regular_font_path"`
-	BoldFontPath          *string        `yaml:"bold_font_path"`
 }
 
 type OIDCConf struct {

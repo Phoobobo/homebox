@@ -27,16 +27,6 @@
           <ButtonGroup>
             <Tooltip>
               <TooltipTrigger>
-                <Button variant="outline" :disabled="loading" size="icon" data-pos="start" @click="openQrScannerPage()">
-                  <MdiBarcodeScan class="size-5" />
-                </Button>
-              </TooltipTrigger>
-              <TooltipContent>
-                <p>{{ $t("components.entity.create_modal.product_tooltip_scan_barcode") }}</p>
-              </TooltipContent>
-            </Tooltip>
-            <Tooltip>
-              <TooltipTrigger>
                 <Button variant="outline" :disabled="loading" size="icon" data-pos="end" @click="openBarcodeDialog()">
                   <MdiBarcode class="size-5" />
                 </Button>
@@ -239,7 +229,6 @@
   import { useTagStore } from "~/stores/tags";
   import { useLocationStore } from "~~/stores/locations";
   import MdiBarcode from "~icons/mdi/barcode";
-  import MdiBarcodeScan from "~icons/mdi/barcode-scan";
   import MdiPackageVariant from "~icons/mdi/package-variant";
   import MdiPackageVariantClosed from "~icons/mdi/package-variant-closed";
   import MdiFileDocumentOutline from "~icons/mdi/file-document-outline";
@@ -724,10 +713,6 @@
         navigateTo(`/item/${data.id}`);
       }
     }
-  }
-
-  function openQrScannerPage() {
-    openDialog(DialogID.Scanner);
   }
 
   function openBarcodeDialog() {

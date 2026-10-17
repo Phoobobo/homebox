@@ -10,7 +10,6 @@
     <EntityCreateModal />
     <TagCreateModal />
     <AppQuickMenuModal :actions="quickMenuActions" />
-    <AppScannerModal />
     <CollectionCreateModal />
     <CollectionJoinModal />
     <CollectionInviteCreateModal />
@@ -135,20 +134,6 @@
                   </SidebarMenuItem>
                 </Collapsible>
               </template>
-
-              <!-- makes scanner accessible easily if using legacy header -->
-              <SidebarMenuItem v-if="preferences.displayLegacyHeader">
-                <SidebarMenuButton
-                  :class="{
-                    'text-nowrap': typeof locale === 'string' && locale.startsWith('zh-'),
-                  }"
-                  :tooltip="$t('menu.scanner')"
-                  @click.prevent="openDialog(DialogID.Scanner)"
-                >
-                  <MdiQrcodeScan />
-                  <span>{{ $t("menu.scanner") }}</span>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroup>
         </SidebarContent>
@@ -202,11 +187,6 @@
               <div>
                 <Button size="icon" :aria-label="$t('global.search')" @click="triggerSearch">
                   <MdiMagnify />
-                </Button>
-              </div>
-              <div>
-                <Button variant="ghost" size="icon" :aria-label="$t('menu.scanner')" @click="openScanner">
-                  <MdiQrcodeScan />
                 </Button>
               </div>
             </div>
@@ -277,7 +257,6 @@
   import MdiFileTree from "~icons/mdi/file-tree";
   import MdiTagMultiple from "~icons/mdi/tag-multiple";
   import MdiMagnify from "~icons/mdi/magnify";
-  import MdiQrcodeScan from "~icons/mdi/qrcode-scan";
   import MdiAccount from "~icons/mdi/account";
   import MdiCog from "~icons/mdi/cog";
   import MdiPackageVariant from "~icons/mdi/package-variant";
@@ -314,14 +293,12 @@
   import { useDialog } from "~/components/ui/dialog-provider";
   import { Input } from "~/components/ui/input";
   import { Button } from "~/components/ui/button";
-  import { toast } from "@/components/ui/sonner";
   import { DialogID, type NoParamDialogIDs } from "~/components/ui/dialog-provider/utils";
   import ModalConfirm from "~/components/ModalConfirm.vue";
   import OutdatedModal from "~/components/App/OutdatedModal.vue";
   import EntityCreateModal from "~/components/Entity/CreateModal.vue";
   import TagCreateModal from "~/components/Tag/CreateModal.vue";
   import AppQuickMenuModal from "~/components/App/QuickMenuModal.vue";
-  import AppScannerModal from "~/components/App/ScannerModal.vue";
   import AppLogo from "~/components/App/Logo.vue";
   import AppHeaderDecor from "~/components/App/HeaderDecor.vue";
   import AppHeaderText from "~/components/App/HeaderText.vue";
@@ -360,23 +337,6 @@
       if (document.activeElement && "blur" in document.activeElement) {
         (document.activeElement as HTMLElement).blur();
       }
-    }
-  };
-
-  const openScanner = () => {
-    // request permission
-    if (navigator.mediaDevices) {
-      navigator.mediaDevices
-        .getUserMedia({ video: true })
-        .then(() => {
-          openDialog(DialogID.Scanner);
-        })
-        .catch(err => {
-          console.error(err);
-          toast.error(t("scanner.permission_denied"));
-        });
-    } else {
-      toast.error(t("scanner.unsupported"));
     }
   };
 

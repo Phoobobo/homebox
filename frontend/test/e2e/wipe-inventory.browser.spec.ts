@@ -9,7 +9,6 @@ const buildStatusResponse = (demo: boolean) => ({
   build: { buildTime: new Date().toISOString(), commit: "test", version: "v0.0.0" },
   demo,
   health: true,
-  labelPrinting: false,
   latest: { date: new Date().toISOString(), version: "v0.0.0" },
   message: "",
   oidc: { allowLocal: true, autoRedirect: false, buttonText: "", enabled: false },

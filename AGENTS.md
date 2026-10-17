@@ -13,6 +13,7 @@
 
 - Optimize for finding household belongings: name, tags, photos, description and a precise nested storage location.
 - Keep item and location entities distinct. Do not restore purchase, warranty, sales, stock, valuation, maintenance or notification workflows without a user request.
+- QR label generation, downloading, printing, scanning and AR scanning are removed. Preserve ordinary classification tags.
 - Collection membership and family invitations remain supported. Their duplicate profile notice was removed; the collection invitation page remains.
 - Preserve Chinese/English switching and the restrained cupcake-based UI. Use existing design tokens, responsive components and accessible labels. Avoid adding UI dependencies for routine changes.
 

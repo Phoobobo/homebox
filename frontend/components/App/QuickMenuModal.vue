@@ -92,17 +92,6 @@
         >
           {{ navigate.text }}
         </CommandItem>
-        <CommandItem
-          value="scanner"
-          @select="
-            () => {
-              closeDialog(DialogID.QuickMenu);
-              openDialog(DialogID.Scanner);
-            }
-          "
-        >
-          {{ t("menu.scanner") }}
-        </CommandItem>
       </CommandGroup>
     </CommandList>
   </CommandDialog>

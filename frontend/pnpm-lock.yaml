@@ -71,15 +71,9 @@ importers:
       '@vueuse/router':
         specifier: ^13.9.0
         version: 13.9.0(vue-router@4.6.4(vue@3.5.20(typescript@5.9.2)))(vue@3.5.20(typescript@5.9.2))
-      '@zxing/library':
-        specifier: ^0.21.3
-        version: 0.21.3
       autoprefixer:
         specifier: ^10.5.0
         version: 10.5.0(postcss@8.5.15)
-      barcode-detector:
-        specifier: ^3.2.0
-        version: 3.2.0(@types/emscripten@1.41.5)
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1

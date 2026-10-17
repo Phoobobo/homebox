@@ -1764,123 +1764,6 @@ const docTemplate = `{
                 }
             }
         },
-        "/v1/labelmaker/asset/{id}": {
-            "get": {
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Items"
-                ],
-                "summary": "Get Asset label",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Asset ID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    },
-                    {
-                        "type": "boolean",
-                        "description": "Print this label, defaults to false",
-                        "name": "print",
-                        "in": "query"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "image/png",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
-        "/v1/labelmaker/item/{id}": {
-            "get": {
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Items"
-                ],
-                "summary": "Get Item label",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Item ID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    },
-                    {
-                        "type": "boolean",
-                        "description": "Print this label, defaults to false",
-                        "name": "print",
-                        "in": "query"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "image/png",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
-        "/v1/labelmaker/location/{id}": {
-            "get": {
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Locations"
-                ],
-                "summary": "Get Location label",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "Location ID",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    },
-                    {
-                        "type": "boolean",
-                        "description": "Print this label, defaults to false",
-                        "name": "print",
-                        "in": "query"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "image/png",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
         "/v1/maintenance": {
             "get": {
                 "security": [
@@ -2179,38 +2062,6 @@ const docTemplate = `{
                             "items": {
                                 "$ref": "#/definitions/repo.BarcodeProduct"
                             }
-                        }
-                    }
-                }
-            }
-        },
-        "/v1/qrcode": {
-            "get": {
-                "security": [
-                    {
-                        "Bearer": []
-                    }
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Items"
-                ],
-                "summary": "Create QR Code",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "data to be encoded into qrcode",
-                        "name": "data",
-                        "in": "query"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "image/jpeg",
-                        "schema": {
-                            "type": "string"
                         }
                     }
                 }
@@ -6300,9 +6151,6 @@ const docTemplate = `{
                     "type": "boolean"
                 },
                 "health": {
-                    "type": "boolean"
-                },
-                "labelPrinting": {
                     "type": "boolean"
                 },
                 "latest": {
