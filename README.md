@@ -29,59 +29,9 @@ Zainaer 是面向家庭的自托管物品定位工具：记录物品是什么、
 
 助手会将对话和本次工具查询返回的记录发送给配置的模型提供商。模型不持有用户登录凭据，不执行 shell；新增记录必须经过独立确认接口。对话历史目前仅保留在当前页面内存中，刷新后清空；待确认草稿在服务重启后失效。
 
-## 构建
+## 开发与运维
 
-后端为 Go，前端为 Vue / Nuxt。生产程序嵌入前端静态资源，可作为单个可执行文件部署；默认使用 SQLite。
-
-需要 Go 1.26+、Node.js 22+ 和 pnpm 10.28。
-
-```sh
-git clone https://github.com/Phoobobo/zainaer.git
-cd zainaer
-pnpm --dir frontend install --frozen-lockfile
-
-# 构建 Linux amd64 程序
-CGO_ENABLED=0 GOOS=linux GOARCH=amd64 \
-  HOUSEHOLD_BUILD_OUTPUT="$PWD/zainaer" \
-  sh scripts/build-household.sh
-```
-
-构建脚本读取 `VERSION` 和当前 Git 提交，生成前端资源并嵌入后端。若需其他平台，请调整 `GOOS`、`GOARCH`。
-
-### 服务器运行示例
-
-将程序复制到服务器，在独立数据目录中运行。以下环境变量用于说明配置方式，不包含可直接使用的密钥：
-
-```sh
-export HBOX_WEB_HOST=127.0.0.1
-export HBOX_WEB_PORT=7745
-export HBOX_WEB_WRITE_TIMEOUT=180s
-export HBOX_AUTH_API_KEY_PEPPER='<自行生成并持久保存的随机密钥>'
-export HBOX_OPTIONS_ALLOW_ANALYTICS=false
-export HBOX_OPTIONS_GITHUB_RELEASE_CHECK=false
-./zainaer
-```
-
-工作目录下的 `.data/` 存放默认数据库、附件与模型配置。生产环境使用进程管理器保持运行，通过 HTTPS 反向代理或受控隧道访问。模型可能需要多轮请求，响应超时应覆盖助手的 150 秒总执行窗口。
-
-出于与现有部署的兼容性，内部 Go module/import 路径与 `HBOX_*` 环境变量暂保留 HomeBox 命名；这不代表本项目继续跟踪上游版本。
-
-## 验证
-
-```sh
-cd backend
-go test ./app/api/handlers/v1 -run TestAI -count=1
-```
-
-这些测试覆盖密钥加密、配置校验、集合隔离、草稿确认/取消、重复提交和模型故障切换。网络模拟测试需要临时回环端口，不调用真实模型。真实提供商检查是显式启用的可选测试。
-
-前端构建及 ESLint 使用 `frontend/package.json` 中的脚本。全量类型检查目前存在继承代码中的 Ref / 实体类型问题，不能将前端构建成功描述为全量类型检查通过。
-
-## 部署与备份
-
-维护者当前仅以北京 ECS 为生产服务；原 Mac 应用及 Companion 已退役，本机 SSH 隧道仅用于访问云端。具体主机信息和凭据不写入仓库。
-
-更新前备份当前程序及 SQLite 数据库，上传后核对校验和，再替换程序并重启。不要使用旧的本地数据库覆盖云端数据。备份数据库时应使用 SQLite backup API，或停服后取得一致快照；同时保存附件、模型加密配置及解密主密钥。
+构建、验证、部署和备份说明见 [AGENTS.md](AGENTS.md)。
 
 ## 来源与许可证
 
